@@ -1,0 +1,115 @@
+# BARCURSOR 系統差異分析
+
+## 專案目的
+
+1. **複製現有卡片分享系統**
+   - 完整複製現有的 LINE 卡片分享系統
+   - 保留核心功能和資料結構
+
+2. **建立新卡片系統**
+   - 根據新架構調整系統設計
+   - 優化現有功能
+   - 改進使用者體驗
+
+3. **系統更新與優化**
+   - 更新技術架構
+   - 優化效能
+   - 增強安全性
+
+## 系統差異比較
+
+### 1. GAS 服務差異
+
+#### NEW_BRIDGE 服務
+| 項目 | 舊系統 | 新架構 |
+|------|--------|--------|
+| 部署ID | AKfycbytOQjUDPdHvPwn9CAtsNc9VyB356gakqEEBDVsA0J90J21fKcbsMX_FrihdjqJ8KyY | 待更新 |
+| 網址 | https://script.google.com/macros/s/AKfycbytOQjUDPdHvPwn9CAtsNc9VyB356gakqEEBDVsA0J90J21fKcbsMX_FrihdjqJ8KyY/exec | 待更新 |
+| API 端點 | - status=get<br>- status=save<br>- status=uploadGithub<br>- status=addReadCount | 待優化 |
+| 資料儲存 | Google Sheet ID: 1_ShBQpCCgzPUPB6glCa7gKEzLRfKQBNu7R6dtrc2utU | 待更新 |
+| GitHub Token | 硬編碼在程式碼中 | 使用環境變數 |
+
+#### NEW_REPLY 服務
+| 項目 | 舊系統 | 新架構 |
+|------|--------|--------|
+| 部署ID | AKfycbwZIJQ7toOMi4-IzStW6VW5WhRrWLPlbEgIc2t-waWgxoHD-wHBEi-1OmqV7YpU5cSW | 待更新 |
+| 網址 | https://script.google.com/macros/s/AKfycbwZIJQ7toOMi4-IzStW6VW5WhRrWLPlbEgIc2t-waWgxoHD-wHBEi-1OmqV7YpU5cSW/exec | 待更新 |
+| LINE Token | 硬編碼在程式碼中 | 使用環境變數 |
+| 訊息處理 | 基本 Flex Message | 優化訊息格式 |
+
+### 2. NEW_LINECARD 前端差異
+
+| 項目 | 舊系統 | 新架構 |
+|------|--------|--------|
+| 框架 | Hexo | 現代化前端框架 |
+| 目錄結構 | 複雜的部落格結構 | 簡化的卡片系統結構 |
+| 部署路徑 | https://tsamcservice.github.io/BARCURSOR/NEW_LINECARD/ | 待更新 |
+| 重定向邏輯 | 簡單的 JavaScript 重定向 | 優化的路由系統 |
+
+### 3. OG_HTML 實現差異
+
+| 項目 | 舊系統 | 新架構 |
+|------|--------|--------|
+| 生成方式 | 動態生成並上傳 | 預生成並快取 |
+| 儲存位置 | GitHub 倉庫 | CDN 或物件儲存 |
+| 訪問 URL | 靜態 GitHub Pages URL | 優化的 CDN URL |
+
+### 4. 資料儲存差異
+
+| 項目 | 舊系統 | 新架構 |
+|------|--------|--------|
+| 資料庫 | Google Sheet | 專用資料庫 |
+| 資料結構 | 簡單的表格結構 | 優化的資料模型 |
+| 備份機制 | 手動備份 | 自動備份系統 |
+
+### 5. 安全性差異
+
+| 項目 | 舊系統 | 新架構 |
+|------|--------|--------|
+| Token 管理 | 硬編碼 | 環境變數 |
+| API 權限 | 基本權限控制 | 細粒度權限控制 |
+| 錯誤處理 | 基本錯誤處理 | 完整的錯誤處理機制 |
+
+## 需要更新的項目
+
+### 1. 技術架構更新
+- 更新前端框架
+- 優化資料儲存
+- 改進 API 設計
+
+### 2. 安全性更新
+- 實施環境變數管理
+- 更新權限控制
+- 加強錯誤處理
+
+### 3. 效能優化
+- 優化資料存取
+- 改進快取機制
+- 提升回應速度
+
+### 4. 使用者體驗
+- 優化介面設計
+- 改進分享功能
+- 增強互動性
+
+## 建議改進方向
+
+1. **架構改進**
+   - 採用現代化前端框架
+   - 使用專用資料庫
+   - 實施微服務架構
+
+2. **安全性提升**
+   - 完整的環境變數管理
+   - 實施 API 金鑰輪換
+   - 加強資料加密
+
+3. **效能優化**
+   - 實施 CDN
+   - 優化資料存取
+   - 改進快取策略
+
+4. **維護性提升**
+   - 完整的文件系統
+   - 自動化測試
+   - 監控系統 

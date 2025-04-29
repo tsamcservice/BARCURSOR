@@ -1,0 +1,115 @@
+# BARCURSOR System Differences Analysis
+
+## Project Goals
+
+1. **Replicate Existing Card Sharing System**
+   - Complete replication of existing LINE card sharing system
+   - Preserve core functionality and data structure
+
+2. **Create New Card System**
+   - Adjust system design based on new architecture
+   - Optimize existing features
+   - Improve user experience
+
+3. **System Updates and Optimization**
+   - Update technical architecture
+   - Optimize performance
+   - Enhance security
+
+## System Differences Comparison
+
+### 1. GAS Service Differences
+
+#### NEW_BRIDGE Service
+| Item | Old System | New Architecture |
+|------|-----------|------------------|
+| Deployment ID | AKfycbytOQjUDPdHvPwn9CAtsNc9VyB356gakqEEBDVsA0J90J21fKcbsMX_FrihdjqJ8KyY | To be updated |
+| URL | https://script.google.com/macros/s/AKfycbytOQjUDPdHvPwn9CAtsNc9VyB356gakqEEBDVsA0J90J21fKcbsMX_FrihdjqJ8KyY/exec | To be updated |
+| API Endpoints | - status=get<br>- status=save<br>- status=uploadGithub<br>- status=addReadCount | To be optimized |
+| Data Storage | Google Sheet ID: 1_ShBQpCCgzPUPB6glCa7gKEzLRfKQBNu7R6dtrc2utU | To be updated |
+| GitHub Token | Hardcoded in code | Use environment variables |
+
+#### NEW_REPLY Service
+| Item | Old System | New Architecture |
+|------|-----------|------------------|
+| Deployment ID | AKfycbwZIJQ7toOMi4-IzStW6VW5WhRrWLPlbEgIc2t-waWgxoHD-wHBEi-1OmqV7YpU5cSW | To be updated |
+| URL | https://script.google.com/macros/s/AKfycbwZIJQ7toOMi4-IzStW6VW5WhRrWLPlbEgIc2t-waWgxoHD-wHBEi-1OmqV7YpU5cSW/exec | To be updated |
+| LINE Token | Hardcoded in code | Use environment variables |
+| Message Processing | Basic Flex Message | Optimized message format |
+
+### 2. NEW_LINECARD Frontend Differences
+
+| Item | Old System | New Architecture |
+|------|-----------|------------------|
+| Framework | Hexo | Modern frontend framework |
+| Directory Structure | Complex blog structure | Simplified card system structure |
+| Deployment Path | https://tsamcservice.github.io/BARCURSOR/NEW_LINECARD/ | To be updated |
+| Redirect Logic | Simple JavaScript redirect | Optimized routing system |
+
+### 3. OG_HTML Implementation Differences
+
+| Item | Old System | New Architecture |
+|------|-----------|------------------|
+| Generation Method | Dynamic generation and upload | Pre-generation and caching |
+| Storage Location | GitHub repository | CDN or object storage |
+| Access URL | Static GitHub Pages URL | Optimized CDN URL |
+
+### 4. Data Storage Differences
+
+| Item | Old System | New Architecture |
+|------|-----------|------------------|
+| Database | Google Sheet | Dedicated database |
+| Data Structure | Simple table structure | Optimized data model |
+| Backup Mechanism | Manual backup | Automated backup system |
+
+### 5. Security Differences
+
+| Item | Old System | New Architecture |
+|------|-----------|------------------|
+| Token Management | Hardcoded | Environment variables |
+| API Permissions | Basic permission control | Fine-grained permission control |
+| Error Handling | Basic error handling | Complete error handling mechanism |
+
+## Items to Update
+
+### 1. Technical Architecture Updates
+- Update frontend framework
+- Optimize data storage
+- Improve API design
+
+### 2. Security Updates
+- Implement environment variable management
+- Update permission control
+- Strengthen error handling
+
+### 3. Performance Optimization
+- Optimize data access
+- Improve caching mechanism
+- Enhance response speed
+
+### 4. User Experience
+- Optimize interface design
+- Improve sharing functionality
+- Enhance interactivity
+
+## Suggested Improvements
+
+1. **Architecture Improvements**
+   - Adopt modern frontend framework
+   - Use dedicated database
+   - Implement microservices architecture
+
+2. **Security Enhancements**
+   - Complete environment variable management
+   - Implement API key rotation
+   - Strengthen data encryption
+
+3. **Performance Optimization**
+   - Implement CDN
+   - Optimize data access
+   - Improve caching strategy
+
+4. **Maintainability Improvements**
+   - Complete documentation system
+   - Automated testing
+   - Monitoring system 
