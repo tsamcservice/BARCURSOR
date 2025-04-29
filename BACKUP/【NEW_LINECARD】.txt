@@ -1,0 +1,54 @@
+【NEW_LINECARD】
+
+【GAS】
+【SHEET】ID
+1_ShBQpCCgzPUPB6glCa7gKEzLRfKQBNu7R6dtrc2utU
+
+【SHEET】url
+https://docs.google.com/spreadsheets/d/1_ShBQpCCgzPUPB6glCa7gKEzLRfKQBNu7R6dtrc2utU/edit?gid=0#gid=0
+
+
+【NEW_REPLY】
+部署ID
+AKfycbwZIJQ7toOMi4-IzStW6VW5WhRrWLPlbEgIc2t-waWgxoHD-wHBEi-1OmqV7YpU5cSW
+
+網址(網頁應用程式)
+https://script.google.com/macros/s/AKfycbwZIJQ7toOMi4-IzStW6VW5WhRrWLPlbEgIc2t-waWgxoHD-wHBEi-1OmqV7YpU5cSW/exec
+
+
+【NEW_BRIDGE】
+部署ID
+AKfycbytOQjUDPdHvPwn9CAtsNc9VyB356gakqEEBDVsA0J90J21fKcbsMX_FrihdjqJ8KyY
+
+網址(網頁應用程式)
+https://script.google.com/macros/s/AKfycbytOQjUDPdHvPwn9CAtsNc9VyB356gakqEEBDVsA0J90J21fKcbsMX_FrihdjqJ8KyY/exec
+
+
+【GIHUB】
+ACCESS Token V2 
+GITHUB_TOKEN = "YOUR_GITHUB_TOKEN"
+
+TS_LINECARD_GAS
+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
+
+
+【LINE LOGIN】LIFF
+
+Channel ID:2007327814
+Channel Secret:cd9c3461d38c8a19b3c1a40d23e5abb3
+USER ID:Ueb6db8be8de7d482843f067eee7c4c87
+Callback URL:https://tsamcservice.github.io/BARCURSOR/callback
+
+LIFF ID:2007327814-DGly5XNk
+LIFF URL:https://liff.line.me/2007327814-DGly5XNk
+Endpoint URL：https://tsamcservice.github.io/BARCURSOR/
+
+
+【LINE BOT】
+Name:NEWCS
+Bot basic ID:@403npsxt
+ChannelID:2007327902
+Channel secret:ddd0d925d78bcf03722931d49ff27a75
+Channel access token
+Ldq2Q7r5XtI8wuNuKA+zBmthI2ytWHfHXofMsBWIXnFMRqPjFnFQTRVtr89G/l3+fvIjt4+qPTr9nUAbOLUhLz3pcxgTLZRUQ5v2C9zHEIvUgaQ81asWrepPs1JBcKAYYqrRVDwsHR3lZ/eE7vSi2AdB04t89/1O/w1cDnyilFU=
+

@@ -1,0 +1,87 @@
+# Hexo Configuration
+## Docs: https://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
+# Site
+title: BARCURSOR
+subtitle: LINE Card System
+description: LINE Card Sharing System
+author: TSAMC
+language: zh-TW
+timezone: Asia/Taipei
+
+# URL
+url: https://tsamcservice.github.io/BARCURSOR/NEW_LINECARD
+root: /BARCURSOR/NEW_LINECARD/
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+pretty_urls:
+  trailing_index: true
+  trailing_html: true
+
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+
+# Writing
+new_post_name: :title.md
+default_layout: post
+titlecase: false
+external_link:
+  enable: true
+  field: site
+  exclude: ''
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+future: true
+highlight:
+  enable: true
+  line_number: true
+  auto_detect: false
+  tab_replace: ''
+  wrap: true
+  hljs: false
+
+# Home page setting
+index_generator:
+  path: ''
+  per_page: 10
+  order_by: -date
+
+# Category & Tag
+default_category: uncategorized
+category_map:
+tag_map:
+
+# Date / Time format
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+updated_option: 'mtime'
+
+# Pagination
+per_page: 10
+pagination_dir: page
+
+# Extensions
+theme: landscape
+deploy:
+  type: git
+  repo: https://github.com/tsamcservice/BARCURSOR.git
+  branch: master
+
+# LINE Configuration
+line:
+  liff_id: 2007327814-DGly5XNk
+  liff_url: https://liff.line.me/2007327814-DGly5XNk
+  endpoint_url: https://tsamcservice.github.io/BARCURSOR/
+  callback_url: https://tsamcservice.github.io/BARCURSOR/callback
+  gas_bridge_url: https://script.google.com/macros/s/AKfycbytOQjUDPdHvPwn9CAtsNc9VyB356gakqEEBDVsA0J90J21fKcbsMX_FrihdjqJ8KyY/exec
+  gas_reply_url: https://script.google.com/macros/s/AKfycbwZIJQ7toOMi4-IzStW6VW5WhRrWLPlbEgIc2t-waWgxoHD-wHBEi-1OmqV7YpU5cSW/exec 

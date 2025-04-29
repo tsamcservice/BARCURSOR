@@ -1,0 +1,254 @@
+{
+  "type": "bubble",
+  "size": "mega",
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "image",
+        "url": "https://3428750.so-buy.com/_files/50/3428750/f/TS.jpg",
+        "size": "full",
+        "aspectRatio": "1:1",
+        "aspectMode": "cover"
+      },
+      {
+        "type": "image",
+        "url": "https://3428750.so-buy.com/_files/50/3428750/f/PNG2.png",
+        "size": "full",
+        "aspectRatio": "1:1",
+        "animated": true,
+        "aspectMode": "cover",
+        "position": "absolute"
+      },
+      {
+        "type": "box",
+        "width": "90px",
+        "layout": "horizontal",
+        "spacing": "none",
+        "contents": [
+          {
+            "type": "box",
+            "action": {
+              "uri": "http://fav",
+              "type": "uri",
+              "label": "VIP會員號碼"
+            },
+            "layout": "vertical",
+            "contents": [
+              {
+                "url": "https://3428750.so-buy.com/_files/50/3428750/f/i-fav.png",
+                "type": "image",
+                "action": {
+                  "uri": "http://heart",
+                  "type": "uri",
+                  "label": "action"
+                },
+                "size": "35px"
+              },
+              {
+                "type": "text",
+                "text": "A001",
+                "size": "10px",
+                "align": "center",
+                "gravity": "center",
+                "offsetTop": "30px",
+                "position": "absolute",
+                "offsetStart": "12px",
+                "color": "#FFFFFF"
+              }
+            ],
+            "cornerRadius": "30px",
+            "backgroundColor": "#A4924A"
+          },
+          {
+            "type": "box",
+            "action": {
+              "uri": "http://fwd",
+              "type": "uri",
+              "label": "愛心會員號碼"
+            },
+            "layout": "vertical",
+            "contents": [
+              {
+                "url": "https://3428750.so-buy.com/_files/50/3428750/f/loveicon.png",
+                "type": "image",
+                "action": {
+                  "uri": "http://vip",
+                  "type": "uri",
+                  "label": "action"
+                },
+                "size": "32px"
+              },
+              {
+                "type": "text",
+                "size": "10px",
+                "align": "center",
+                "gravity": "center",
+                "position": "absolute",
+                "offsetTop": "30px",
+                "offsetStart": "12px",
+                "text": "B001",
+                "color": "#FFFFFF"
+              }
+            ],
+            "cornerRadius": "30px",
+            "backgroundColor": "#d00308"
+          }
+        ],
+        "offsetTop": "250px",
+        "offsetStart": "10px",
+        "height": "45px",
+        "position": "absolute"
+      },
+      {
+        "size": "20px",
+        "text": "【呈璽理財藝術共享空間】",
+        "type": "text",
+        "align": "center",
+        "color": "#000000",
+        "weight": "bold",
+        "margin": "md"
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "我在呈璽，欣賞美好幸福 我在呈璽，喝茶喝咖啡很悠閒 我不在呈璽，就是在前往呈璽的路上",
+            "wrap": true,
+            "size": "16px",
+            "margin": "sm",
+            "color": "#000001"
+          }
+        ],
+        "paddingEnd": "65px",
+        "paddingStart": "5px"
+      },
+      {
+        "type": "box",
+        "width": "65px",
+        "layout": "vertical",
+        "spacing": "none",
+        "contents": [
+          {
+            "type": "box",
+            "action": {
+              "uri": "http://fav",
+              "type": "uri",
+              "label": "action"
+            },
+            "layout": "vertical",
+            "contents": [
+              {
+                "url": "https://3428750.so-buy.com/_files/50/3428750/23/05/8c2a0367cf3d71a0.png",
+                "type": "image",
+                "action": {
+                  "uri": "https://www.leishan.com.tw/",
+                  "type": "uri",
+                  "label": "官網"
+                },
+                "aspectRatio": "1:1",
+                "aspectMode": "cover",
+                "backgroundColor": "#000000"
+              }
+            ],
+            "cornerRadius": "35px",
+            "borderWidth": "semi-bold",
+            "borderColor": "#A4924C"
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "text",
+                "size": "14px",
+                "text": "【呈璽】",
+                "style": "italic",
+                "color": "#A4924C",
+                "align": "center",
+                "weight": "bold",
+                "wrap": true,
+                "margin": "none"
+              }
+            ],
+            "paddingAll": "xs",
+            "cornerRadius": "25px",
+            "margin": "none",
+            "spacing": "none"
+          }
+        ],
+        "position": "absolute",
+        "offsetEnd": "5px",
+        "margin": "md",
+        "offsetTop": "315px"
+      },
+      {
+        "type": "box",
+        "layout": "horizontal",
+        "contents": [
+          {
+            "type": "button",
+            "action": {
+              "type": "uri",
+              "label": "呈璽LINE@",
+              "uri": "https://donate.ls-love.org/"
+            },
+            "color": "#A4924A",
+            "style": "primary",
+            "height": "sm",
+            "offsetEnd": "1px"
+          },
+          {
+            "type": "button",
+            "action": {
+              "type": "uri",
+              "label": "分享給好友",
+              "uri": "http://fwd"
+            },
+            "color": "#A4924B",
+            "style": "primary",
+            "height": "sm",
+            "offsetStart": "1px"
+          }
+        ],
+        "margin": "md"
+      }
+    ],
+    "backgroundColor": "#E1E6E0",
+    "paddingAll": "10px"
+  },
+  "footer": {
+    "type": "box",
+    "layout": "horizontal",
+    "spacing": "none",
+    "contents": [
+      {
+        "type": "text",
+        "text": "製作更多精美的個性化卡片",
+        "wrap": true,
+        "color": "#00000050",
+        "align": "center",
+        "action": {
+          "type": "uri",
+          "label": "action",
+          "uri": "https://3428750.so-buy.com/"
+        },
+        "size": "sm",
+        "margin": "none"
+      }
+    ],
+    "backgroundColor": "#E1E6E0",
+    "height": "30px",
+    "margin": "none",
+    "paddingAll": "2px"
+  },
+  "styles": {
+    "footer": {
+      "separatorColor": "#000000",
+      "separator": true
+    }
+  }
+}

@@ -1,0 +1,83 @@
+# GAS 部署說明
+
+## 1. NEW_REPLY 專案部署
+
+### 1.1 建立專案
+1. 前往 [Google Apps Script](https://script.google.com/)
+2. 點擊 "新增專案"
+3. 命名為 "NEW_REPLY"
+
+### 1.2 複製程式碼
+1. 複製 `NEW_REPLY.json` 中的程式碼到編輯器中
+
+### 1.3 設定環境變數
+1. 點擊 "專案設定" > "腳本屬性"
+2. 添加以下屬性：
+   ```
+   LINE_CHANNEL_ID=2007327902
+   LINE_CHANNEL_SECRET=ddd0d925d78bcf03722931d49ff27a75
+   LINE_ACCESS_TOKEN=Ldq2Q7r5XtI8wuNuKA+zBmthI2ytWHfHXofMsBWIXnFMRqPjFnFQTRVtr89G/l3+fvIjt4+qPTr9nUAbOLUhLz3pcxgTLZRUQ5v2C9zHEIvUgaQ81asWrepPs1JBcKAYYqrRVDwsHR3lZ/eE7vSi2AdB04t89/1O/w1cDnyilFU=
+   SHEET_ID=1_ShBQpCCgzPUPB6glCa7gKEzLRfKQBNu7R6dtrc2utU
+   LIFF_ID=2007327814-DGly5XNk
+   ```
+
+### 1.4 部署
+1. 點擊 "部署" > "新增部署"
+2. 選擇 "網頁應用"
+3. 執行身份選擇 "以執行此應用程式的使用者身份"
+4. 存取權限選擇 "任何人"
+5. 點擊 "部署"
+6. 複製部署 ID 和網址：
+   ```
+   部署ID: AKfycbwZIJQ7toOMi4-IzStW6VW5WhRrWLPlbEgIc2t-waWgxoHD-wHBEi-1OmqV7YpU5cSW
+   網址: https://script.google.com/macros/s/AKfycbwZIJQ7toOMi4-IzStW6VW5WhRrWLPlbEgIc2t-waWgxoHD-wHBEi-1OmqV7YpU5cSW/exec
+   ```
+
+## 2. NEW_BRIDGE 專案部署
+
+### 2.1 建立專案
+1. 前往 [Google Apps Script](https://script.google.com/)
+2. 點擊 "新增專案"
+3. 命名為 "NEW_BRIDGE"
+
+### 2.2 複製程式碼
+1. 複製 `NEW_BRIDGE.json` 中的程式碼到編輯器中
+
+### 2.3 設定環境變數
+1. 點擊 "專案設定" > "腳本屬性"
+2. 添加以下屬性：
+   ```
+   SHEET_ID=1_ShBQpCCgzPUPB6glCa7gKEzLRfKQBNu7R6dtrc2utU
+   GITHUB_TOKEN=YOUR_GITHUB_TOKEN
+   ```
+
+### 2.4 部署
+1. 點擊 "部署" > "新增部署"
+2. 選擇 "網頁應用"
+3. 執行身份選擇 "以執行此應用程式的使用者身份"
+4. 存取權限選擇 "任何人"
+5. 點擊 "部署"
+6. 複製部署 ID 和網址：
+   ```
+   部署ID: AKfycbytOQjUDPdHvPwn9CAtsNc9VyB356gakqEEBDVsA0J90J21fKcbsMX_FrihdjqJ8KyY
+   網址: https://script.google.com/macros/s/AKfycbytOQjUDPdHvPwn9CAtsNc9VyB356gakqEEBDVsA0J90J21fKcbsMX_FrihdjqJ8KyY/exec
+   ```
+
+## 3. 更新設定
+
+### 3.1 更新 NEW_LINECARD/data/data.js
+```javascript
+const googleAppsScriptUrl = "https://script.google.com/macros/s/AKfycbytOQjUDPdHvPwn9CAtsNc9VyB356gakqEEBDVsA0J90J21fKcbsMX_FrihdjqJ8KyY/exec";
+const shareLIFFid = "2007327814-DGly5XNk";
+```
+
+### 3.2 更新 LINE Bot 設定
+1. 前往 [LINE Developers Console](https://developers.line.biz/console/)
+2. 在 Channel 設定中更新 Webhook URL
+3. Webhook URL 設為 NEW_REPLY 的部署網址
+
+### 3.3 更新 LIFF 設定
+1. 前往 [LINE Developers Console](https://developers.line.biz/console/)
+2. 在 LIFF 設定中更新 Endpoint URL
+3. Endpoint URL 設為 `https://tsamcservice.github.io/BARCURSOR/NEW_LINECARD/card/`
+

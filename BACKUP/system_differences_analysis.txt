@@ -1,115 +1,94 @@
-# BARCURSOR System Differences Analysis
+# BARCURSOR System Architecture Documentation
 
 ## Project Goals
 
 1. **Replicate Existing Card Sharing System**
    - Complete replication of existing LINE card sharing system
-   - Preserve core functionality and data structure
+   - Preserve all existing functionality and data structure
+   - Maintain current deployment and configuration
 
 2. **Create New Card System**
-   - Adjust system design based on new architecture
-   - Optimize existing features
-   - Improve user experience
+   - Complete replication of existing system architecture
+   - Maintain all existing features
+   - Use same deployment methods
 
-3. **System Updates and Optimization**
-   - Update technical architecture
-   - Optimize performance
-   - Enhance security
+3. **System Maintenance**
+   - Maintain current technical architecture
+   - Preserve current performance settings
+   - Use existing security mechanisms
 
-## System Differences Comparison
+## System Architecture Description
 
-### 1. GAS Service Differences
+### 1. GAS Service Architecture
 
 #### NEW_BRIDGE Service
-| Item | Old System | New Architecture |
-|------|-----------|------------------|
-| Deployment ID | AKfycbytOQjUDPdHvPwn9CAtsNc9VyB356gakqEEBDVsA0J90J21fKcbsMX_FrihdjqJ8KyY | To be updated |
-| URL | https://script.google.com/macros/s/AKfycbytOQjUDPdHvPwn9CAtsNc9VyB356gakqEEBDVsA0J90J21fKcbsMX_FrihdjqJ8KyY/exec | To be updated |
-| API Endpoints | - status=get<br>- status=save<br>- status=uploadGithub<br>- status=addReadCount | To be optimized |
-| Data Storage | Google Sheet ID: 1_ShBQpCCgzPUPB6glCa7gKEzLRfKQBNu7R6dtrc2utU | To be updated |
-| GitHub Token | Hardcoded in code | Use environment variables |
+| Item | Description |
+|------|-------------|
+| Deployment ID | AKfycbytOQjUDPdHvPwn9CAtsNc9VyB356gakqEEBDVsA0J90J21fKcbsMX_FrihdjqJ8KyY |
+| URL | https://script.google.com/macros/s/AKfycbytOQjUDPdHvPwn9CAtsNc9VyB356gakqEEBDVsA0J90J21fKcbsMX_FrihdjqJ8KyY/exec |
+| API Endpoints | - status=get: Get card data<br>- status=save: Save card data<br>- status=uploadGithub: Upload OG HTML<br>- status=addReadCount: Increase read count |
+| Data Storage | Google Sheet ID: 1_ShBQpCCgzPUPB6glCa7gKEzLRfKQBNu7R6dtrc2utU |
+| GitHub Token | Use existing configuration |
 
 #### NEW_REPLY Service
-| Item | Old System | New Architecture |
-|------|-----------|------------------|
-| Deployment ID | AKfycbwZIJQ7toOMi4-IzStW6VW5WhRrWLPlbEgIc2t-waWgxoHD-wHBEi-1OmqV7YpU5cSW | To be updated |
-| URL | https://script.google.com/macros/s/AKfycbwZIJQ7toOMi4-IzStW6VW5WhRrWLPlbEgIc2t-waWgxoHD-wHBEi-1OmqV7YpU5cSW/exec | To be updated |
-| LINE Token | Hardcoded in code | Use environment variables |
-| Message Processing | Basic Flex Message | Optimized message format |
+| Item | Description |
+|------|-------------|
+| Deployment ID | AKfycbwZIJQ7toOMi4-IzStW6VW5WhRrWLPlbEgIc2t-waWgxoHD-wHBEi-1OmqV7YpU5cSW |
+| URL | https://script.google.com/macros/s/AKfycbwZIJQ7toOMi4-IzStW6VW5WhRrWLPlbEgIc2t-waWgxoHD-wHBEi-1OmqV7YpU5cSW/exec |
+| LINE Token | Use existing configuration |
+| Message Processing | Use basic Flex Message format |
 
-### 2. NEW_LINECARD Frontend Differences
+### 2. NEW_LINECARD Frontend Architecture
 
-| Item | Old System | New Architecture |
-|------|-----------|------------------|
-| Framework | Hexo | Modern frontend framework |
-| Directory Structure | Complex blog structure | Simplified card system structure |
-| Deployment Path | https://tsamcservice.github.io/BARCURSOR/NEW_LINECARD/ | To be updated |
-| Redirect Logic | Simple JavaScript redirect | Optimized routing system |
+| Item | Description |
+|------|-------------|
+| Framework | Use Hexo framework |
+| Directory Structure | Maintain existing blog structure |
+| Deployment Path | https://tsamcservice.github.io/BARCURSOR/NEW_LINECARD/ |
+| Redirect Logic | Use existing JavaScript redirect |
 
-### 3. OG_HTML Implementation Differences
+### 3. OG_HTML Implementation
 
-| Item | Old System | New Architecture |
-|------|-----------|------------------|
-| Generation Method | Dynamic generation and upload | Pre-generation and caching |
-| Storage Location | GitHub repository | CDN or object storage |
-| Access URL | Static GitHub Pages URL | Optimized CDN URL |
+| Item | Description |
+|------|-------------|
+| Generation Method | Dynamic generation and upload |
+| Storage Location | GitHub repository |
+| Access URL | Use static GitHub Pages URL |
 
-### 4. Data Storage Differences
+### 4. Data Storage Architecture
 
-| Item | Old System | New Architecture |
-|------|-----------|------------------|
-| Database | Google Sheet | Dedicated database |
-| Data Structure | Simple table structure | Optimized data model |
-| Backup Mechanism | Manual backup | Automated backup system |
+| Item | Description |
+|------|-------------|
+| Database | Use Google Sheet |
+| Data Structure | Maintain existing table structure |
+| Backup Mechanism | Use existing manual backup method |
 
-### 5. Security Differences
+### 5. Security Configuration
 
-| Item | Old System | New Architecture |
-|------|-----------|------------------|
-| Token Management | Hardcoded | Environment variables |
-| API Permissions | Basic permission control | Fine-grained permission control |
-| Error Handling | Basic error handling | Complete error handling mechanism |
+| Item | Description |
+|------|-------------|
+| Token Management | Use existing configuration |
+| API Permissions | Maintain existing permission control |
+| Error Handling | Use existing error handling mechanism |
 
-## Items to Update
+## System Maintenance Description
 
-### 1. Technical Architecture Updates
-- Update frontend framework
-- Optimize data storage
-- Improve API design
+### 1. GAS Service Maintenance
+- Maintain current deployment settings
+- Preserve existing API functionality
+- Use existing environment variables
 
-### 2. Security Updates
-- Implement environment variable management
-- Update permission control
-- Strengthen error handling
+### 2. Frontend Maintenance
+- Maintain current framework
+- Preserve existing features
+- Use existing deployment methods
 
-### 3. Performance Optimization
-- Optimize data access
-- Improve caching mechanism
-- Enhance response speed
+### 3. Data Maintenance
+- Use existing data structure
+- Maintain existing backup methods
+- Preserve existing access methods
 
-### 4. User Experience
-- Optimize interface design
-- Improve sharing functionality
-- Enhance interactivity
-
-## Suggested Improvements
-
-1. **Architecture Improvements**
-   - Adopt modern frontend framework
-   - Use dedicated database
-   - Implement microservices architecture
-
-2. **Security Enhancements**
-   - Complete environment variable management
-   - Implement API key rotation
-   - Strengthen data encryption
-
-3. **Performance Optimization**
-   - Implement CDN
-   - Optimize data access
-   - Improve caching strategy
-
-4. **Maintainability Improvements**
-   - Complete documentation system
-   - Automated testing
-   - Monitoring system 
+### 4. Security Maintenance
+- Use existing Token management
+- Maintain existing permission settings
+- Preserve existing error handling 

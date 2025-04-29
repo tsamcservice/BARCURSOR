@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- 載入資料 -->
+	<script src="../data/common.js"></script>
+	<script src="../data/data.js"></script>
+	<link rel="stylesheet" type="text/css" href="../data/styles.css">
+	<!-- flex2html -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/PamornT/flex2html@main/css/flex2html.css" />
+	<script src="https://cdn.jsdelivr.net/gh/PamornT/flex2html@main/js/flex2html.min.js"></script>
+	<!-- liff -->
+	<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+	<!-- 提示框 -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.5/dist/sweetalert2.min.css" />
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.5/dist/sweetalert2.min.js"></script>
+	<!-- dom-to-image -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+	<!-- fontawesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+	<script src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
+	<!-- pickr 調色盤 -->
+	<link rel="stylesheet" type="text/css"
+		href="https://cdn.jsdelivr.net/npm/@simonwep/pickr@latest/dist/themes/nano.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr@latest/dist/pickr.min.js"></script>
+
+</head>
+
+<body>
+	<div class="loader" id="loader">
+		<div class="sk-chase">
+			<div class="sk-chase-dot"></div>
+			<div class="sk-chase-dot"></div>
+			<div class="sk-chase-dot"></div>
+			<div class="sk-chase-dot"></div>
+			<div class="sk-chase-dot"></div>
+			<div class="sk-chase-dot"></div>
+		</div>
+	</div>
+
+	<div class="form-container">
+		<h1>LIFF Card Share</h1>
+		<h3 id="readCount" style="height: 10px;"></h3>
+		<div class="chatbox">
+			<div id="flex2html_main"></div>
+		</div>
+	</div>
+
+	<script>
+		function createFlex(data_card) {
+			mainTitle_1 = data_card.mainTitle_1 || mainTitle_1;
+			mainTitle_2 = data_card.mainTitle_2 || mainTitle_2;
+			memberId = data_card.memberId || memberId;
+			subTitle_2 = data_card.subTitle_2 || subTitle_2;
+			textContent_1 = data_card.textContent_1 || textContent_1;
+			textContent_1_url = data_card.textContent_1_url || textContent_1_url;
+			textContent_2 = data_card.textContent_2 || textContent_2;
+			textContent_2_url = data_card.textContent_2_url || textContent_2_url;
+			displayName = data_card.displayName || displayName;
+			textColor = data_card.textColor || textColor;
+
+			// 創立並更新 flexJsonList 內容 (改變內部變數)
+			flexJsonList = createFlexJsonList()
+			// 將 flexJson 繪出到 HTML 上 (flexJsonList框已在data.js)
+			my_flexToHtml("flex2html_main", flexJsonList);
+		}
+
+		window.onload = function () {
+			document.getElementById('loader').style.display = 'flex';
+			// 獲取查詢字串
+			var queryString = window.location.search;
+			// 移除第一個問號字元 (?)
+			queryString = queryString.slice(1);
+			// 遍歷全部參數，將其拆分為參數名和值，並存到對象中
+			var parameters = {};
+			queryString.split('&').forEach(pair => {
+				const [paramName, paramValue] = pair.split('=').map(decodeURIComponent);
+				parameters[paramName] = paramValue;
+			});
+
+			userId = parameters["userId"];
+			async function send() {
+				// 向google sheet發送的增加閱讀數
+				await sendRequest("addReadCount", userId);
+				// 取得卡片資料
+				var responseData = await sendRequest("get", userId);
+				if (responseData.status === 'ok') {
+					// 會員卡片 cardJson[0] 讀取並紀錄存下 (flexJsonStatic框已在data.js)
+					flexJsonStatic = responseData.cardJson[0]
+					// 會員卡片 參數寫入
+					const data_card = JSON.parse(responseData.card);
+					createFlex(data_card);
+					document.getElementById('readCount').innerHTML = "觀看人數：" + parseInt(responseData.readCount);
+					document.getElementById('loader').style.display = 'none';
+				}
+			}
+			send()
+		}
+	</script>
+
+</body>
+
+</html>
