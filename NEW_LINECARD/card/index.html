@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -252,7 +251,9 @@
 				// 寫入卡片製作標籤裡面參數預設值 (在data.js)
 				writeElementDefaultValues()
 				// 登入line並取得個人資料
-				liff.init({ liffId: "2000001236-On1R22VW" })
+				liff.init({
+					liffId: "2007327814-DGly5XNk"
+				})
 					.then(() => {
 						if (!liff.isLoggedIn()) {
 							liff.login();
@@ -294,6 +295,9 @@
 									alert("取得使用者資料錯誤\n" + error);
 								});
 						}
+					})
+					.catch((err) => {
+						alert("登入失敗\n" + err);
 					});
 			};
 
