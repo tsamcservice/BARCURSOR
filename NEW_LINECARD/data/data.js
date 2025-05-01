@@ -1,3 +1,4 @@
+// LIFF ID 設定
 const googleAppsScriptUrl = "https://script.google.com/macros/s/AKfycbzQ4AwFFgmqoTgvfrBIBDv6ocIhM8huxOoix6OaguYjHGIlgoo6IEL_KxBonk5QP38jvw/exec";
 const shareLIFFid = "2007327814-DGly5XNk";
 
