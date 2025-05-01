@@ -47,6 +47,7 @@
 | 部署路徑 | /BARCURSOR/NEW_LINECARD/ |
 | 重定向邏輯 | 使用相對路徑重定向 |
 | 主要頁面 | - /card/index.html<br>- /preview/index.html<br>- /download_card/index.html |
+| 資源路徑 | - 圖片：/BARCURSOR/NEW_LINECARD/data/images/<br>- CSS：/BARCURSOR/NEW_LINECARD/css/<br>- JS：/BARCURSOR/NEW_LINECARD/js/ |
 
 ### 3. OG_HTML 實現
 
@@ -56,6 +57,7 @@
 | 儲存位置 | GitHub 倉庫 |
 | 訪問 URL | 使用相對路徑 |
 | 重定向邏輯 | 使用相對路徑重定向 |
+| 模板路徑 | /BARCURSOR/OG_HTML/template.html |
 
 ### 4. 資料儲存架構
 
@@ -84,6 +86,7 @@
 - 保持現有框架
 - 維持現有功能
 - 使用相對路徑部署
+- 定期檢查路徑設定
 
 ### 3. 資料維護
 - 使用現有資料結構

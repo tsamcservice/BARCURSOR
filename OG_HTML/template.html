@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:title" content="{{title}}">
     <meta property="og:description" content="{{description}}">
-    <meta property="og:image" content="https://tsamcservice.github.io/BARCURSOR/NEW_LINECARD/data/images/{{image}}">
-    <meta property="og:url" content="https://tsamcservice.github.io/BARCURSOR/OG_HTML/{{id}}.html">
+    <meta property="og:image" content="/BARCURSOR/NEW_LINECARD/data/images/{{image}}">
+    <meta property="og:url" content="/BARCURSOR/OG_HTML/{{id}}.html">
     <meta property="og:type" content="website">
     <title>{{title}}</title>
     <style>
@@ -14,41 +13,27 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
         }
         .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
         }
-        .card {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            padding: 20px;
-            margin: 20px 0;
-        }
         .image {
-            width: 100%;
+            max-width: 100%;
             height: auto;
-            border-radius: 5px;
         }
-        .title {
-            font-size: 24px;
-            margin: 10px 0;
-        }
-        .description {
-            color: #666;
-            line-height: 1.6;
+        .content {
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="card">
-            <img src="https://tsamcservice.github.io/BARCURSOR/NEW_LINECARD/data/images/{{image}}" alt="{{title}}" class="image">
-            <h1 class="title">{{title}}</h1>
-            <p class="description">{{description}}</p>
+        <img src="/BARCURSOR/NEW_LINECARD/data/images/{{image}}" alt="{{title}}" class="image">
+        <div class="content">
+            <h1>{{title}}</h1>
+            <p>{{description}}</p>
         </div>
     </div>
 </body>
