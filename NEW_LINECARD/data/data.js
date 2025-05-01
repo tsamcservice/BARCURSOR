@@ -1,4 +1,4 @@
-const googleAppsScriptUrl = "https://script.google.com/macros/s/AKfycbwZIJQ7toOMi4-IzStW6VW5WhRrWLPlbEgIc2t-waWgxoHD-wHBEi-1OmqV7YpU5cSW/exec";
+const googleAppsScriptUrl = "https://script.google.com/macros/s/AKfycbzQ4AwFFgmqoTgvfrBIBDv6ocIhM8huxOoix6OaguYjHGIlgoo6IEL_KxBonk5QP38jvw/exec";
 const shareLIFFid = "2007327814-DGly5XNk";
 
 // 這張會員卡片的 URL
