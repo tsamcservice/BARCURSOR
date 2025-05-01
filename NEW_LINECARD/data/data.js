@@ -1,5 +1,5 @@
-const googleAppsScriptUrl = "https://script.google.com/macros/s/AKfycbytOQjUDPdHvPwn9CAtsNc9VyB356gakqEEBDVsA0J90J21fKcbsMX_FrihdjqJ8KyY/exec";
-const shareLIFFid = "2007327814-DGly5XNk"
+const googleAppsScriptUrl = "https://script.google.com/macros/s/AKfycbwZIJQ7toOMi4-IzStW6VW5WhRrWLPlbEgIc2t-waWgxoHD-wHBEi-1OmqV7YpU5cSW/exec";
+const shareLIFFid = "2007327814-DGly5XNk";
 
 // 這張會員卡片的 URL
 var card_img_url;
@@ -42,7 +42,7 @@ function createFlexJsonList() {
 	flexJsonList = flexJsonList.replace(/textContent_2/g, textContent_2);
 	flexJsonList = flexJsonList.replace(/displayName/g, displayName);
 	flexJsonList = flexJsonList.replace(/textColor/g, textColor);
-	flexJsonList = flexJsonList.replace(/S{3,}/g, "https://liff.line.me/" + shareLIFFid + "/?userId=" + encodeURIComponent(userId));
+	flexJsonList = flexJsonList.replace(/S{3,}/g, "https://tsamcservice.github.io/BARCURSOR/NEW_LINECARD/share/?userId=" + encodeURIComponent(userId));
 	// document.getElementById('test').innerHTML = flexJsonList
 	return [JSON.parse(flexJsonList)]
 }
