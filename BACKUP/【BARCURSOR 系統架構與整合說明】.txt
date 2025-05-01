@@ -10,6 +10,10 @@ BARCURSOR/
 │   ├── NEW_REPLY/         # 回覆服務
 │   └── NEW_line_card_sheet/ # 試算表服務（備用）
 ├── NEW_LINECARD/          # LINE 卡片前端應用
+│   ├── card/             # 卡片編輯頁面
+│   ├── share/            # 分享頁面
+│   ├── preview/          # 預覽頁面
+│   └── data/            # 共用資源
 └── OG_HTML/               # Open Graph HTML 卡片
 ```
 
@@ -54,7 +58,7 @@ LIFF_ID = "2007327814-DGly5XNk"
 - Channel Secret: cd9c3461d38c8a19b3c1a40d23e5abb3
 - LIFF ID: 2007327814-DGly5XNk
 - LIFF URL: https://liff.line.me/2007327814-DGly5XNk
-- Endpoint URL: https://tsamcservice.github.io/BARCURSOR/
+- Endpoint URL: https://tsamcservice.github.io/BARCURSOR/NEW_LINECARD/
 
 ## 3. 部署資訊
 
@@ -130,4 +134,16 @@ flowchart LR
 ### 6.3 OG 預覽錯誤
 1. 檢查 GitHub Token
 2. 確認檔案路徑
-3. 檢查 HTML 格式 
+3. 檢查 HTML 格式
+
+## 7. 重要注意事項
+
+### 7.1 路徑設定
+- 所有 LIFF 相關的路徑必須指向 `/NEW_LINECARD/`
+- 確保所有分享連結使用正確的 LIFF ID
+- 避免使用舊的路徑和連結
+
+### 7.2 資料存取
+- 確保 Sheet 的讀寫權限正確
+- 使用正確的 API 端點
+- 定期檢查資料完整性 

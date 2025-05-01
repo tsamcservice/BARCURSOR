@@ -81,3 +81,20 @@ const shareLIFFid = "2007327814-DGly5XNk";
 2. 在 LIFF 設定中更新 Endpoint URL
 3. Endpoint URL 設為 `https://tsamcservice.github.io/BARCURSOR/NEW_LINECARD/card/`
 
+## 4. 注意事項
+
+### 4.1 權限設定
+1. 確保 Google Sheet 的存取權限正確
+2. 確認 GitHub Token 的權限設定
+3. 檢查 LINE Bot 的 Webhook 設定
+
+### 4.2 路徑設定
+1. 所有 LIFF 相關路徑必須指向 `/NEW_LINECARD/`
+2. 避免使用舊的路徑和連結
+3. 確保所有分享連結使用正確的 LIFF ID
+
+### 4.3 錯誤處理
+1. 定期檢查 GAS 執行日誌
+2. 監控 Sheet 資料的完整性
+3. 確保 API 呼叫的正確性
+
