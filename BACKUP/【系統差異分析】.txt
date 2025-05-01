@@ -1,99 +1,69 @@
-# BARCURSOR 系統差異分析
+# BARCURSOR 系統架構與整合說明
 
-## 專案目的
+## 1. 系統架構概覽
 
-1. **複製現有卡片分享系統**
-   - 完整複製現有的 LINE 卡片分享系統
-   - 保留所有現有功能和資料結構
-   - 維持現有部署和設定
+### 1.1 主要資料夾結構
+```
+BARCURSOR/
+├── GAS/                    # Google Apps Script 源代碼
+│   ├── NEW_BRIDGE/        # 橋接服務
+│   └── NEW_REPLY/         # 回覆服務
+├── NEW_LINECARD/          # LINE 卡片前端應用
+│   ├── card/             # 卡片編輯頁面
+│   ├── share/            # 分享頁面
+│   ├── preview/          # 預覽頁面
+│   └── data/            # 共用資源
+└── OG_HTML/               # Open Graph HTML 卡片
+```
 
-2. **建立新卡片系統**
-   - 完全複製現有系統架構
-   - 保持所有現有功能
-   - 使用相同的部署方式
+### 1.2 系統元件說明
 
-3. **系統維護**
-   - 保持現有技術架構
-   - 維持現有效能設定
-   - 沿用現有安全機制
+1. **GAS 服務**
+   - NEW_BRIDGE：處理前端與後端的橋接
+   - NEW_REPLY：處理 LINE Webhook 回覆
+   - 部署 ID 和 URL：參考 【GAS 部署說明】.txt
 
-## 系統架構說明
+2. **NEW_LINECARD**
+   - 前端應用程式
+   - 部署路徑：/BARCURSOR/NEW_LINECARD/
+   - 資源路徑：/BARCURSOR/NEW_LINECARD/data/
 
-### 1. GAS 服務架構
+3. **OG_HTML**
+   - 動態生成的 Open Graph HTML 卡片
+   - 訪問路徑：/BARCURSOR/NEW_LINECARD/og_html/
 
-#### NEW_BRIDGE 服務
-| 項目 | 說明 |
-|------|------|
-| 部署ID | AKfycbytOQjUDPdHvPwn9CAtsNc9VyB356gakqEEBDVsA0J90J21fKcbsMX_FrihdjqJ8KyY |
-| 網址 | https://script.google.com/macros/s/AKfycbytOQjUDPdHvPwn9CAtsNc9VyB356gakqEEBDVsA0J90J21fKcbsMX_FrihdjqJ8KyY/exec |
-| API 端點 | - status=get：取得卡片資料<br>- status=save：儲存卡片資料<br>- status=uploadGithub：上傳 OG HTML<br>- status=addReadCount：增加閱讀次數 |
-| 資料儲存 | Google Sheet ID: 1_ShBQpCCgzPUPB6glCa7gKEzLRfKQBNu7R6dtrc2utU |
-| GitHub Token | 使用現有設定 |
+### 1.3 環境變數配置
 
-#### NEW_REPLY 服務
-| 項目 | 說明 |
-|------|------|
-| 部署ID | AKfycbwZIJQ7toOMi4-IzStW6VW5WhRrWLPlbEgIc2t-waWgxoHD-wHBEi-1OmqV7YpU5cSW |
-| 網址 | https://script.google.com/macros/s/AKfycbwZIJQ7toOMi4-IzStW6VW5WhRrWLPlbEgIc2t-waWgxoHD-wHBEi-1OmqV7YpU5cSW/exec |
-| LINE Token | 使用現有設定 |
-| 訊息處理 | 使用基本 Flex Message 格式 |
+1. **Google Apps Script 環境變數**
+   - 參考 【GAS 部署說明】.txt 中的設定
 
-### 2. NEW_LINECARD 前端架構
+2. **前端配置**
+   - 位於 NEW_LINECARD/config.yml
+   - 包含 LIFF、回調 URL 等設定
 
-| 項目 | 說明 |
-|------|------|
-| 框架 | 使用 Hexo 框架 |
-| 目錄結構 | 維持現有部落格結構 |
-| 部署路徑 | /BARCURSOR/NEW_LINECARD/ |
-| 重定向邏輯 | 使用相對路徑重定向 |
-| 主要頁面 | - /card/index.html<br>- /preview/index.html<br>- /download_card/index.html |
-| 資源路徑 | - 圖片：/BARCURSOR/NEW_LINECARD/data/images/<br>- CSS：/BARCURSOR/NEW_LINECARD/css/<br>- JS：/BARCURSOR/NEW_LINECARD/js/ |
+## 2. 部署資訊
 
-### 3. OG_HTML 實現
+### 2.1 GAS 部署
+- 參考 【GAS 部署說明】.txt
 
-| 項目 | 說明 |
-|------|------|
-| 生成方式 | 動態生成並上傳 |
-| 儲存位置 | GitHub 倉庫 |
-| 訪問 URL | 使用相對路徑 |
-| 重定向邏輯 | 使用相對路徑重定向 |
-| 模板路徑 | /BARCURSOR/OG_HTML/template.html |
+### 2.2 GitHub 部署
+- 主倉庫: BARCURSOR
+- 分支: master
+- 部署路徑: /BARCURSOR/
 
-### 4. 資料儲存架構
+## 3. 系統維護
 
-| 項目 | 說明 |
-|------|------|
-| 資料庫 | 使用 Google Sheet |
-| 資料結構 | 維持現有表格結構 |
-| 備份機制 | 使用現有手動備份方式 |
+### 3.1 GAS 維護
+1. 定期檢查 API 功能
+2. 監控資料完整性
+3. 確保權限正確
 
-### 5. 安全性設定
+### 3.2 前端維護
+1. 確保路徑正確
+2. 檢查資源載入
+3. 監控效能
 
-| 項目 | 說明 |
-|------|------|
-| Token 管理 | 使用現有設定 |
-| API 權限 | 維持現有權限控制 |
-| 錯誤處理 | 使用現有錯誤處理機制 |
-
-## 系統維護說明
-
-### 1. GAS 服務維護
-- 保持現有部署設定
-- 維持現有 API 功能
-- 使用現有環境變數
-
-### 2. 前端維護
-- 保持現有框架
-- 維持現有功能
-- 使用相對路徑部署
-- 定期檢查路徑設定
-
-### 3. 資料維護
-- 使用現有資料結構
-- 維持現有備份方式
-- 保持現有存取方式
-
-### 4. 安全性維護
-- 使用現有 Token 管理
-- 維持現有權限設定
-- 保持現有錯誤處理 
+### 3.3 OG HTML 維護
+1. 檢查模板更新
+2. 確保預覽正常
+3. 監控生成過程 
