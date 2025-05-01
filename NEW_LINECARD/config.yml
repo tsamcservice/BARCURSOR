@@ -11,7 +11,7 @@ language: zh-TW
 timezone: Asia/Taipei
 
 # URL
-url: https://tsamcservice.github.io/BARCURSOR/NEW_LINECARD
+url: /BARCURSOR/NEW_LINECARD
 root: /BARCURSOR/NEW_LINECARD/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -81,7 +81,7 @@ deploy:
 line:
   liff_id: 2007327814-DGly5XNk
   liff_url: https://liff.line.me/2007327814-DGly5XNk
-  endpoint_url: https://tsamcservice.github.io/BARCURSOR/
-  callback_url: https://tsamcservice.github.io/BARCURSOR/callback
+  endpoint_url: /BARCURSOR/
+  callback_url: /BARCURSOR/callback
   gas_bridge_url: https://script.google.com/macros/s/AKfycbytOQjUDPdHvPwn9CAtsNc9VyB356gakqEEBDVsA0J90J21fKcbsMX_FrihdjqJ8KyY/exec
   gas_reply_url: https://script.google.com/macros/s/AKfycbwZIJQ7toOMi4-IzStW6VW5WhRrWLPlbEgIc2t-waWgxoHD-wHBEi-1OmqV7YpU5cSW/exec 

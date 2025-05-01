@@ -193,7 +193,7 @@ function uploadGithub_OG_html(userId, card_img_url = "", mainTitle_1 = "", mainT
       // 請求成功後的響應數據
       console.log(responseData)
       // 回傳網址
-      return "https://tsamcservice.github.io/BARCURSOR/NEW_LINECARD/og_html/og_html/" + userId + "_" + timestamp + ".html";
+      return "/BARCURSOR/NEW_LINECARD/og_html/og_html/" + userId + "_" + timestamp + ".html";
 
     } catch (error) {
       console.log(error);
