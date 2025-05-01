@@ -343,7 +343,7 @@
 					timer: 1200,
 					showConfirmButton: false
 				});
-				element.href = "mailto:?subject=【卡片分享】&body=使用瀏覽器預覽照片連結：https://tsamcservice.github.io/preview%2F%3FuserId%3D" + userId;
+				element.href = "mailto:?subject=【卡片分享】&body=使用瀏覽器預覽照片連結：/BARCURSOR/NEW_LINECARD/preview%2F%3FuserId%3D" + userId;
 			}
 			// 分享twitter按钮的點擊事件
 			function shareButtonTwitter(element) {
@@ -389,7 +389,7 @@
 			// 分享Copy Link URL按钮的點擊事件
 			async function shareButtonCopyURL() {
 				// 取得要複製的文字
-				var textToCopy = "https://tsamcservice.github.io/preview/?userId=" + encodeURIComponent(userId)
+				var textToCopy = "/BARCURSOR/NEW_LINECARD/preview/?userId=" + encodeURIComponent(userId)
 
 				try {
 					await navigator.clipboard.writeText(textToCopy);
@@ -430,7 +430,7 @@
 					// 由於line本身無法下載檔案，一律跳轉用外部瀏覽器下載
 					alert("將自動開啟預設瀏覽器\n並下載檔案")
 					liff.openWindow({
-						url: 'https://tsamcservice.github.io/download_card/?userId=' + encodeURIComponent(userId),
+						url: '/BARCURSOR/NEW_LINECARD/download_card/?userId=' + encodeURIComponent(userId),
 						external: true  // 開啟外部瀏覽器
 					});
 				}

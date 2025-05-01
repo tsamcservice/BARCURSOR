@@ -44,8 +44,9 @@
 |------|------|
 | 框架 | 使用 Hexo 框架 |
 | 目錄結構 | 維持現有部落格結構 |
-| 部署路徑 | https://tsamcservice.github.io/BARCURSOR/NEW_LINECARD/ |
-| 重定向邏輯 | 使用現有 JavaScript 重定向 |
+| 部署路徑 | /BARCURSOR/NEW_LINECARD/ |
+| 重定向邏輯 | 使用相對路徑重定向 |
+| 主要頁面 | - /card/index.html<br>- /preview/index.html<br>- /download_card/index.html |
 
 ### 3. OG_HTML 實現
 
@@ -53,7 +54,8 @@
 |------|------|
 | 生成方式 | 動態生成並上傳 |
 | 儲存位置 | GitHub 倉庫 |
-| 訪問 URL | 使用靜態 GitHub Pages URL |
+| 訪問 URL | 使用相對路徑 |
+| 重定向邏輯 | 使用相對路徑重定向 |
 
 ### 4. 資料儲存架構
 
@@ -81,7 +83,7 @@
 ### 2. 前端維護
 - 保持現有框架
 - 維持現有功能
-- 使用現有部署方式
+- 使用相對路徑部署
 
 ### 3. 資料維護
 - 使用現有資料結構

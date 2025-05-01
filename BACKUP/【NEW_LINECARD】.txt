@@ -37,11 +37,11 @@ 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
 Channel ID:2007327814
 Channel Secret:cd9c3461d38c8a19b3c1a40d23e5abb3
 USER ID:Ueb6db8be8de7d482843f067eee7c4c87
-Callback URL:https://tsamcservice.github.io/BARCURSOR/callback
+Callback URL:/BARCURSOR/callback
 
 LIFF ID:2007327814-DGly5XNk
 LIFF URL:https://liff.line.me/2007327814-DGly5XNk
-Endpoint URL：https://tsamcservice.github.io/BARCURSOR/
+Endpoint URL：/BARCURSOR/
 
 
 【LINE BOT】

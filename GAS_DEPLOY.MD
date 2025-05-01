@@ -1,5 +1,25 @@
 # GAS 部署說明
 
+## 工作流程說明
+
+### 1. 程式碼管理
+- 所有 GAS 程式碼的修改都應該在 `GAS_DEPLOY.MD` 中進行
+- 本機端的 `.json` 檔案僅用於版本控制，不應直接修改
+- 程式碼分為兩個主要服務：
+  - NEW_BRIDGE：4 個主要函數
+  - NEW_REPLY：8 個主要函數
+
+### 2. 部署流程
+1. 在 `GAS_DEPLOY.MD` 中修改程式碼
+2. 複製修改後的程式碼到 GAS 編輯器
+3. 手動部署到 GAS
+4. 將修改推送到 GitHub 進行版本控制
+
+### 3. 注意事項
+- 保持主架構不變，僅修改必要的連結部分
+- 確保程式碼格式正確，便於複製到 GAS
+- 每次修改後都要測試功能是否正常
+
 ## NEW_BRIDGE 服務部署
 
 ### 完整程式碼
@@ -126,7 +146,7 @@ function uploadGithub_OG_html(userId, card_img_url = "", mainTitle_1 = "", mainT
 					</head>
 					<body>
 						<script>
-							window.location.href = "https://tsamcservice.github.io/BARCURSOR/NEW_LINECARD/preview/?userId=` + encodeURIComponent(userId) + `";	
+							window.location.href = "/BARCURSOR/NEW_LINECARD/preview/?userId=` + encodeURIComponent(userId) + `";	
 						</script>
 					</body>
 				</html>`;
@@ -412,8 +432,45 @@ function test() {
 5. 部署 ID: AKfycbwZIJQ7toOMi4-IzStW6VW5WhRrWLPlbEgIc2t-waWgxoHD-wHBEi-1OmqV7YpU5cSW
 6. 部署 URL: https://script.google.com/macros/s/AKfycbwZIJQ7toOMi4-IzStW6VW5WhRrWLPlbEgIc2t-waWgxoHD-wHBEi-1OmqV7YpU5cSW/exec
 
+## 環境變數設定
+
+### 1. NEW_BRIDGE 環境變數
+```javascript
+SHEET_ID = "1_ShBQpCCgzPUPB6glCa7gKEzLRfKQBNu7R6dtrc2utU"
+GITHUB_TOKEN = "YOUR_GITHUB_TOKEN"
+```
+
+### 2. NEW_REPLY 環境變數
+```javascript
+LINE_CHANNEL_ID = "2007327902"
+LINE_CHANNEL_SECRET = "ddd0d925d78bcf03722931d49ff27a75"
+LINE_ACCESS_TOKEN = "Ldq2Q7r5XtI8wuNuKA+zBmthI2ytWHfHXofMsBWIXnFMRqPjFnFQTRVtr89G/l3+fvIjt4+qPTr9nUAbOLUhLz3pcxgTLZRUQ5v2C9zHEIvUgaQ81asWrepPs1JBcKAYYqrRVDwsHR3lZ/eE7vSi2AdB04t89/1O/w1cDnyilFU="
+SHEET_ID = "1_ShBQpCCgzPUPB6glCa7gKEzLRfKQBNu7R6dtrc2utU"
+LIFF_ID = "2007327814-DGly5XNk"
+```
+
+## 部署步驟
+
+### 1. NEW_BRIDGE 部署
+1. 創建新的 GAS 專案
+2. 複製 `GAS_DEPLOY.MD` 中的 NEW_BRIDGE 程式碼
+3. 設定環境變數
+4. 部署為網頁應用程式
+5. 部署 ID: AKfycbytOQjUDPdHvPwn9CAtsNc9VyB356gakqEEBDVsA0J90J21fKcbsMX_FrihdjqJ8KyY
+6. 部署 URL: https://script.google.com/macros/s/AKfycbytOQjUDPdHvPwn9CAtsNc9VyB356gakqEEBDVsA0J90J21fKcbsMX_FrihdjqJ8KyY/exec
+
+### 2. NEW_REPLY 部署
+1. 創建新的 GAS 專案
+2. 複製 `GAS_DEPLOY.MD` 中的 NEW_REPLY 程式碼
+3. 設定環境變數
+4. 部署為網頁應用程式
+5. 部署 ID: AKfycbwZIJQ7toOMi4-IzStW6VW5WhRrWLPlbEgIc2t-waWgxoHD-wHBEi-1OmqV7YpU5cSW
+6. 部署 URL: https://script.google.com/macros/s/AKfycbwZIJQ7toOMi4-IzStW6VW5WhRrWLPlbEgIc2t-waWgxoHD-wHBEi-1OmqV7YpU5cSW/exec
+
 ## 注意事項
 1. 確保所有環境變數正確設定
 2. 部署時選擇「以我身分執行」
 3. 部署後測試 API 功能
-4. 確認 LINE Bot 設定正確 
+4. 確認 LINE Bot 設定正確
+5. 每次修改程式碼後，都要重新部署並測試
+6. 保持程式碼格式，便於複製到 GAS 編輯器 
