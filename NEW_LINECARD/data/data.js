@@ -42,7 +42,7 @@ function createFlexJsonList() {
 	flexJsonList = flexJsonList.replace(/textContent_2/g, textContent_2);
 	flexJsonList = flexJsonList.replace(/displayName/g, displayName);
 	flexJsonList = flexJsonList.replace(/textColor/g, textColor);
-	flexJsonList = flexJsonList.replace(/S{3,}/g, "https://tsamcservice.github.io/BARCURSOR/NEW_LINECARD/share/?userId=" + encodeURIComponent(userId));
+	flexJsonList = flexJsonList.replace(/S{3,}/g, "https://liff.line.me/" + shareLIFFid + "/?userId=" + encodeURIComponent(userId));
 	// document.getElementById('test').innerHTML = flexJsonList
 	return [JSON.parse(flexJsonList)]
 }
