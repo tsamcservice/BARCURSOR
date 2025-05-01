@@ -37,6 +37,20 @@ BARCURSOR/
 - **Google Spreadsheet**：存放卡片資料 (JSON 模板、使用者對應表)
   - ID: `1_ShBQpCCgzPUPB6glCa7gKEzLRfKQBNu7R6dtrc2utU`
 
+### 1.3 環境變數配置
+
+1. **Google Apps Script 環境變數**
+   - `SHEET_ID`：Google Sheet 的 ID
+   - `GITHUB_TOKEN`：GitHub Personal Access Token
+   - `LINE_CHANNEL_ID`：LINE Channel ID
+   - `LINE_CHANNEL_SECRET`：LINE Channel Secret
+   - `LINE_ACCESS_TOKEN`：LINE Access Token
+   - `LIFF_ID`：LIFF ID
+
+2. **前端配置**
+   - 位於 `NEW_LINECARD/config.yml`
+   - 包含 LIFF ID、回調 URL 等設定
+
 ## 2. 環境變數設定
 
 ### 2.1 GAS 環境變數
@@ -146,4 +160,40 @@ flowchart LR
 ### 7.2 資料存取
 - 確保 Sheet 的讀寫權限正確
 - 使用正確的 API 端點
-- 定期檢查資料完整性 
+- 定期檢查資料完整性
+
+## 8. 安全性考慮
+
+1. **敏感資訊處理**
+   - 所有敏感資訊（如 API 金鑰、Token）必須使用環境變數
+   - 禁止在代碼中硬編碼敏感資訊
+   - 定期更換 Access Token
+
+2. **資料存取控制**
+   - 使用 Google Apps Script 的權限管理
+   - LINE LIFF 的用戶驗證
+   - GitHub Pages 的靜態資源訪問控制
+
+## 9. 部署流程
+
+1. **GAS 部署**
+   - 設置必要的環境變數
+   - 部署為網頁應用
+   - 設置適當的存取權限
+
+2. **前端部署**
+   - 更新 `config.yml` 配置
+   - 推送到 GitHub 倉庫
+   - 等待 GitHub Pages 自動部署
+
+## 10. 錯誤處理
+
+1. **常見錯誤**
+   - 環境變數未設置
+   - API 請求超時
+   - 資料格式不正確
+
+2. **處理方式**
+   - 檢查環境變數配置
+   - 查看 GAS 執行日誌
+   - 確認網絡連接狀態 
