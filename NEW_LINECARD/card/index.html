@@ -251,6 +251,7 @@
 				liff.init({ liffId: "2007327814-DGly5XNk" })
 					.then(() => {
 						if (!liff.isLoggedIn()) {
+							// 如果未登入，重定向到 LIFF 登入頁面
 							liff.login();
 						} else {
 							// 取得個人資料
@@ -261,6 +262,7 @@
 									// 取得 google sheet 個人資料
 									var responseData = await sendRequest("get", userId, null, "https://script.google.com/macros/s/AKfycbwfy6NZbWcrhc9KSQtMC2bcAWaGI_T4ASU42d8h4Jk0qNLHktnFJAynGJxcNV5QaLTrYA/exec");
 									if (responseData.status == "first") {
+										// 如果是第一次登入，初始化卡片資料
 										await sendRequest("save", userId, readShowCardData());
 										var responseData = await sendRequest("get", userId);
 									}
@@ -490,7 +492,7 @@
 			}
 
 			// 元素失去焦點事件
-			document.addEventListener("blur", function (event) {
+			document.addEventListener("blur", async function (event) {
 				// 檢查事件源是否為輸入框且已經loading完成
 				if (event.target.tagName.toLowerCase() === "input" && document.getElementById("loader").style.display == "none") {
 					// 檢查textContent_2_url的input格是否合法的url
@@ -503,9 +505,13 @@
 							return;
 						}
 					}
-					sendRequest("save", userId, readShowCardData(), isDebug = false);
+					// 儲存卡片資料
+					await sendRequest("save", userId, readShowCardData());
+					// 上傳 OG HTML
+					var responseData = await sendRequest("uploadGithub", userId, readShowCardData());
+					console.log("OG HTML 上傳成功:", responseData.uploadOG_url);
 				}
-			}, true); // 注意，這裡的 true 參數是為了在捕獲階段觸發事件，這對於 'blur' 和 'focus' 事件是必要的
+			}, true);
 
 			// colorPicker創建調色盤元素(文字放textColor)
 			var textColor_Element = document.getElementById("textColor");

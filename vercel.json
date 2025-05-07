@@ -12,15 +12,15 @@
       "dest": "/NEW_LINECARD/index.html"
     },
     {
-      "src": "/card",
+      "src": "/card/?*",
       "dest": "/NEW_LINECARD/card/index.html"
     },
     {
-      "src": "/preview",
+      "src": "/preview/?*",
       "dest": "/NEW_LINECARD/preview/index.html"
     },
     {
-      "src": "/share",
+      "src": "/share/?*",
       "dest": "/NEW_LINECARD/share/index.html"
     },
     {
@@ -56,20 +56,15 @@
       "dest": "/NEW_LINECARD/about/$1"
     },
     {
+      "src": "/og_html/(.*)",
+      "dest": "/NEW_LINECARD/og_html/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "/NEW_LINECARD/$1"
     }
   ],
   "env": {
     "LIFF_ID": "2007327814-DGly5XNk"
-  },
-  "rewrites": [
-    { "source": "/", "destination": "/NEW_LINECARD/index.html" },
-    { "source": "/card", "destination": "/NEW_LINECARD/card/index.html" },
-    { "source": "/card/", "destination": "/NEW_LINECARD/card/index.html" },
-    { "source": "/preview", "destination": "/NEW_LINECARD/preview/index.html" },
-    { "source": "/preview/", "destination": "/NEW_LINECARD/preview/index.html" },
-    { "source": "/share", "destination": "/NEW_LINECARD/share/index.html" },
-    { "source": "/share/", "destination": "/NEW_LINECARD/share/index.html" }
-  ]
+  }
 } 
