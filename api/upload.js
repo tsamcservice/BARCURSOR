@@ -21,7 +21,7 @@ export default async function handler(req, res) {
     // 寫入檔案
     fs.writeFileSync(safePath, content);
     
-    // 返回檔案 URL
+    // 返回檔案 URL（使用相對路徑）
     const fileUrl = `/${filePath}`;
     return res.status(200).json({ url: fileUrl });
   } catch (error) {

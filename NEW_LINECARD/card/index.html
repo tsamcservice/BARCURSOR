@@ -368,7 +368,7 @@
 			// 分享Copy Link URL按钮的點擊事件
 			async function shareButtonCopyURL() {
 				// 取得要複製的文字
-				var textToCopy = "/BARCURSOR/NEW_LINECARD/preview/?userId=" + encodeURIComponent(userId)
+				var textToCopy = "https://barcursor-kt0y1qoip-tsamcservices-projects.vercel.app/preview/?userId=" + encodeURIComponent(userId)
 
 				try {
 					await navigator.clipboard.writeText(textToCopy);
