@@ -7,7 +7,13 @@
 </head>
 <body>
   <script>
-    location.href = '/card'; // 重定向到卡片頁面
+    // 檢查是否在 LINE 環境中
+    if (window.navigator.userAgent.toLowerCase().indexOf('line') > -1) {
+      location.href = '/card/'; // 重定向到卡片頁面
+    } else {
+      // 如果不是在 LINE 環境中，重定向到 LIFF
+      location.href = 'https://liff.line.me/2007327814-DGly5XNk';
+    }
   </script>
 </body>
 </html>

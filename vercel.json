@@ -62,5 +62,14 @@
   ],
   "env": {
     "LIFF_ID": "2007327814-DGly5XNk"
-  }
+  },
+  "rewrites": [
+    { "source": "/", "destination": "/NEW_LINECARD/index.html" },
+    { "source": "/card", "destination": "/NEW_LINECARD/card/index.html" },
+    { "source": "/card/", "destination": "/NEW_LINECARD/card/index.html" },
+    { "source": "/preview", "destination": "/NEW_LINECARD/preview/index.html" },
+    { "source": "/preview/", "destination": "/NEW_LINECARD/preview/index.html" },
+    { "source": "/share", "destination": "/NEW_LINECARD/share/index.html" },
+    { "source": "/share/", "destination": "/NEW_LINECARD/share/index.html" }
+  ]
 } 

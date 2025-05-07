@@ -244,7 +244,7 @@
 				my_flexToHtml("flex2html_main", flexJsonList);
 			}
 
-			// 網頁載入完後值行
+			// 網頁載入完後執行
 			window.onload = function () {
 				document.getElementById('loader').style.display = 'flex';
 				// 初始化 LIFF
@@ -368,7 +368,7 @@
 			// 分享Copy Link URL按钮的點擊事件
 			async function shareButtonCopyURL() {
 				// 取得要複製的文字
-				var textToCopy = "https://barcursor-kt0y1qoip-tsamcservices-projects.vercel.app/preview/?userId=" + encodeURIComponent(userId)
+				var textToCopy = "https://liff.line.me/2007327814-DGly5XNk?userId=" + encodeURIComponent(userId);
 
 				try {
 					await navigator.clipboard.writeText(textToCopy);
