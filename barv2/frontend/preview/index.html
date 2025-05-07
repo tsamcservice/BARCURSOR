@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex Message 預覽</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="preview-container">
+            <div id="preview" class="preview"></div>
+            <div class="preview-actions">
+                <button onclick="shareCard()">分享到 LINE</button>
+                <button onclick="copyShareLink()">複製分享連結</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        // 初始化 LIFF
+        async function initLiff() {
+            try {
+                await liff.init({ liffId: '2007327814-BdWpj70m' });
+                if (!liff.isLoggedIn()) {
+                    liff.login();
+                }
+            } catch (error) {
+                console.error('LIFF 初始化失敗:', error);
+            }
+        }
+
+        // 載入卡片資料
+        async function loadCard() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const cardData = urlParams.get('data');
+            
+            if (cardData) {
+                const card = JSON.parse(decodeURIComponent(cardData));
+                document.getElementById('preview').innerHTML = JSON.stringify(card, null, 2);
+            }
+        }
+
+        // 分享到 LINE
+        async function shareCard() {
+            try {
+                const urlParams = new URLSearchParams(window.location.search);
+                const cardData = urlParams.get('data');
+                
+                if (liff.isApiAvailable('shareTargetPicker')) {
+                    await liff.shareTargetPicker([
+                        {
+                            type: 'flex',
+                            altText: 'Flex Message',
+                            contents: JSON.parse(decodeURIComponent(cardData))
+                        }
+                    ]);
+                } else {
+                    await liff.sendMessages([
+                        {
+                            type: 'flex',
+                            altText: 'Flex Message',
+                            contents: JSON.parse(decodeURIComponent(cardData))
+                        }
+                    ]);
+                }
+            } catch (error) {
+                console.error('分享失敗:', error);
+                alert('分享失敗，請稍後再試');
+            }
+        }
+
+        // 複製分享連結
+        function copyShareLink() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                alert('分享連結已複製到剪貼簿');
+            }).catch(() => {
+                alert('複製失敗，請手動複製網址');
+            });
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            initLiff();
+            loadCard();
+        });
+    </script>
+</body>
+</html> 

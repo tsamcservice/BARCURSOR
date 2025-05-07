@@ -1,18 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-TW">
 <head>
-  <meta charset="utf-8">
-  <title>BARCURSOR</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BARCURSOR Card System</title>
+  <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <script src="js/common.js"></script>
 </head>
 <body>
+  <div id="loading">載入中...</div>
   <script>
-    // 檢查是否在 LINE 環境中
-    if (window.navigator.userAgent.toLowerCase().indexOf('line') > -1) {
-      location.href = '/card/'; // 重定向到卡片頁面
-    } else {
-      // 如果不是在 LINE 環境中，重定向到 LIFF
-      location.href = 'https://liff.line.me/2007327814-DGly5XNk';
+    // 檢查是否為管理頁面
+    if (window.location.pathname.includes('/admin')) {
+      checkAdminAuth().then(isAdmin => {
+        if (!isAdmin) {
+          window.location.href = '/';
+        }
+      });
     }
   </script>
 </body>

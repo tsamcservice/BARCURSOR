@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LINE Flex Message 編輯器</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="editor-container">
+            <div class="editor-section">
+                <h2>Flex Message 編輯器</h2>
+                <div class="editor-tools">
+                    <button onclick="addComponent('box')">新增 Box</button>
+                    <button onclick="addComponent('text')">新增文字</button>
+                    <button onclick="addComponent('image')">新增圖片</button>
+                    <button onclick="addComponent('button')">新增按鈕</button>
+                </div>
+                <div id="editor" class="editor"></div>
+            </div>
+            <div class="preview-section">
+                <h2>即時預覽</h2>
+                <div id="preview" class="preview"></div>
+                <div class="preview-actions">
+                    <button onclick="saveCard()">儲存卡片</button>
+                    <button onclick="previewCard()">預覽卡片</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/editor.js"></script>
+</body>
+</html> 

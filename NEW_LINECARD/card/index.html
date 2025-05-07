@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>LIFF Card Share</title>
-	<!-- 載入資料 -->
+	<title>LIFF 名片分享</title>
+	<!-- 修正路徑：假設 common.js 和 data.js 在 /data/ 目錄下 -->
 	<script src="/data/common.js"></script>
 	<script src="/data/data.js"></script>
+	<!-- 修正路徑：假設 styles.css 在 /data/ 目錄下 -->
 	<link rel="stylesheet" type="text/css" href="/data/styles.css">
 	<!-- flex2html -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/PamornT/flex2html@main/css/flex2html.css" />
@@ -29,7 +30,7 @@
 </head>
 
 <body>
-	<div class="loader" id="loader">
+	<div class="loader" id="loader" style="display: flex;">
 		<div class="sk-chase">
 			<div class="sk-chase-dot"></div>
 			<div class="sk-chase-dot"></div>
@@ -40,19 +41,19 @@
 		</div>
 	</div>
 
-	<div class="loadPromotionalCard" id="loadPromotionalCard">
+	<div class="loadPromotionalCard" id="loadPromotionalCard" style="display: none;">
 		<div class="form-container" style="max-width: 80%; width: auto; max-height: 90%;">
 			<div style="display: flex; gap: 15px; align-items: center; ">
 				<h2>選擇想要附加宣傳的卡片</h2>
 				<button onclick="document.getElementById('loadPromotionalCard').style.display = 'none'">返回</button>
 			</div>
 			<div class="slider" id="slider" style="zoom: 0.7;">
-				<!-- 這裡將會放入  promotional card 宣傳卡片 -->
+				<!-- 這裡將會放入 promotional card 宣傳卡片 -->
 			</div>
 		</div>
 	</div>
 
-	<div class="hiddenForward">
+	<div class="hiddenForward" style="display: none;">
 		<div class="form-container">
 			<div style="display: flex; justify-content: space-between; align-items: center; width: 310px">
 				<h1 style="font-size:1.8em;">LIFF Card Share</h1>
@@ -160,6 +161,83 @@
 		</div>
 
 		<script>
+			async function initializeApp() {
+				console.log("initializeApp 開始");
+				document.getElementById('loader').style.display = 'flex';
+				try {
+					await liff.init({ liffId: "2007327814-DGly5XNk" });
+					console.log("LIFF 初始化成功");
+
+					if (!liff.isLoggedIn()) {
+						console.log("使用者未登入，執行 liff.login()");
+						liff.login();
+						return;
+					}
+
+					console.log("使用者已登入");
+					const profile = await liff.getProfile();
+					userId = profile.userId;
+					displayName = profile.displayName;
+					console.log("取得使用者資料：", { userId, displayName });
+
+					if (typeof writeElementDefaultValues === 'function') {
+						writeElementDefaultValues();
+					} else {
+						console.error('writeElementDefaultValues 函數未定義');
+					}
+					document.getElementById("displayName").value = displayName;
+
+					const response = await sendRequest("get", userId);
+					console.log("GAS 回應 (get)：", response);
+
+					if (response && response.status === "first") {
+						console.log("首次登入，設定預設值並儲存");
+						// 取得 card_json[0] 作為 flexJsonStatic
+						if (response.cardJson && response.cardJson[0]) {
+							flexJsonStatic = response.cardJson[0];
+							console.log("[initializeApp] flexJsonStatic 來自 cardJson[0]：", flexJsonStatic);
+						}
+						await sendRequest("save", userId, readShowCardData());
+						const initialSaveResponse = await sendRequest("get", userId);
+						if (initialSaveResponse && initialSaveResponse.status === "ok") {
+							const data_card = JSON.parse(initialSaveResponse.card);
+							writeShowCardData(data_card);
+						}
+					} else if (response && response.status === "ok") {
+						console.log("載入已儲存資料");
+						if (response.cardJson && response.cardJson[0]) {
+							flexJsonStatic = response.cardJson[0];
+							console.log("[initializeApp] flexJsonStatic 來自 cardJson[0]：", flexJsonStatic);
+						}
+						const data_card = JSON.parse(response.card);
+						writeShowCardData(data_card);
+					} else {
+						console.warn("無法從 GAS 獲取有效卡片資料，將使用前端預設值");
+					}
+
+					if (typeof loadPromotionalCards === 'function') {
+						await loadPromotionalCards();
+					} else {
+						console.error('loadPromotionalCards 函數未定義');
+					}
+
+					if (typeof initializeColorPicker === 'function') {
+						initializeColorPicker();
+					} else {
+						console.error('initializeColorPicker 函數未定義');
+					}
+
+				} catch (error) {
+					console.error("LIFF 或應用程式初始化失敗：", error);
+				} finally {
+					document.getElementById('loader').style.display = 'none';
+					console.log("initializeApp 結束");
+				}
+			}
+
+			// 確保 DOM 完全載入後再執行 LIFF 初始化
+			window.addEventListener('load', initializeApp);
+
 			// 從頁面上的卡片參數讀取出來
 			function readShowCardData() {
 				return JSON.stringify({
@@ -199,88 +277,97 @@
 				document.querySelector(".hiddenBackward").classList.remove("hidden");
 			}
 			function showFlex() {
+				console.log('[showFlex] 觸發');
 				document.querySelector(".hiddenForward").classList.remove("hidden");
 				document.querySelector(".hiddenBackward").classList.add("hidden");
 
 				var mainTitle_1_Element = document.getElementById("mainTitle_1");
 				mainTitle_1 = mainTitle_1_Element.value || mainTitle_1_Element.placeholder;
-
 				var mainTitle_2_Element = document.getElementById("mainTitle_2");
 				mainTitle_2 = mainTitle_2_Element.value || mainTitle_2_Element.placeholder;
-
 				var memberId_Element = document.getElementById("memberId");
 				memberId = memberId_Element.value || memberId_Element.placeholder;
-
 				var subTitle_2_Element = document.getElementById("subTitle_2");
 				subTitle_2 = subTitle_2_Element.value || subTitle_2_Element.placeholder;
-
 				var textContent_1_Element = document.getElementById("textContent_1");
 				textContent_1 = textContent_1_Element.value || textContent_1_Element.placeholder;
-
 				var textContent_1_url_Element = document.getElementById("upload_text");
 				textContent_1_url = textContent_1_url_Element.textContent;
-
 				var textContent_2_Element = document.getElementById("textContent_2");
 				textContent_2 = textContent_2_Element.value || textContent_2_Element.placeholder;
-
 				var textContent_2_url_Element = document.getElementById("textContent_2_url");
 				textContent_2_url = textContent_2_url_Element.value || textContent_2_url_Element.placeholder;
-
 				var displayName_Element = document.getElementById("displayName");
 				displayName = displayName_Element.value || displayName_Element.placeholder;
-
 				var textColor_Element = document.getElementById("textColor");
 				textColor = textColor_Element.textContent;
 
-				// 創立並更新 flexJsonList 內容 (改變內部變數)
-				flexJsonList = createFlexJsonList()
-				// 找出已被選擇的宣傳卡片id
-				var selectedElements = document.querySelectorAll(".card.promotionalCard.selected [id^='flex2htmlPromotional']");
-				selectedElements.forEach(function (tempElement) {
-					var selectedElementsIdNumer = parseInt(tempElement.id.replace("flex2htmlPromotional", ""));
-					flexJsonList.push(JSON.parse(cardJson[selectedElementsIdNumer]))
+				console.log('[showFlex] 欄位資料', {
+					mainTitle_1, mainTitle_2, memberId, subTitle_2, textContent_1, textContent_1_url, textContent_2, textContent_2_url, displayName, textColor
 				});
-				// 將 flexJson 繪出到 HTML 上 (flexJsonList框已在data.js)
+
+				flexJsonList = createFlexJsonList();
+				console.log('[showFlex] flexJsonList', flexJsonList);
 				my_flexToHtml("flex2html_main", flexJsonList);
 			}
 
-			// 網頁載入完後執行
-			window.onload = function () {
-				document.getElementById('loader').style.display = 'flex';
-				// 初始化 LIFF
-				liff.init({ liffId: "2007327814-DGly5XNk" })
-					.then(() => {
-						if (!liff.isLoggedIn()) {
-							// 如果未登入，重定向到 LIFF 登入頁面
-							liff.login();
-						} else {
-							// 取得個人資料
-							liff.getProfile()
-								.then(async function (profile) {
-									userId = profile.userId;
-									displayName = profile.displayName;
-									// 取得 google sheet 個人資料
-									var responseData = await sendRequest("get", userId, null, "https://script.google.com/macros/s/AKfycbwfy6NZbWcrhc9KSQtMC2bcAWaGI_T4ASU42d8h4Jk0qNLHktnFJAynGJxcNV5QaLTrYA/exec");
-									if (responseData.status == "first") {
-										// 如果是第一次登入，初始化卡片資料
-										await sendRequest("save", userId, readShowCardData());
-										var responseData = await sendRequest("get", userId);
-									}
-									const dataCard = JSON.parse(responseData.card);
-									writeShowCardData(dataCard);
-									document.getElementById('loader').style.display = 'none';
-								})
-								.catch((err) => {
-									console.error('取得個人資料失敗', err);
-									document.getElementById('loader').style.display = 'none';
-								});
+			// 初始化調色盤
+			function initializeColorPicker() {
+				const pickr = Pickr.create({
+					el: '#colorPicker',
+					theme: 'nano',
+					default: textColor,
+					components: {
+						preview: true,
+						opacity: true,
+						hue: true,
+						interaction: {
+							hex: true,
+							rgba: true,
+							input: true,
+							clear: false,
+							save: true
 						}
-					})
-					.catch((err) => {
-						console.error('LIFF 初始化失敗', err);
-						document.getElementById('loader').style.display = 'none';
-					});
-			};
+					}
+				});
+
+				pickr.on('save', (color) => {
+					const hexColor = color.toHEXA().toString();
+					document.getElementById("textColor").textContent = hexColor;
+					updateCardPreview();
+				});
+			}
+
+			// 更新卡片預覽
+			function updateCardPreview() {
+				console.log('[updateCardPreview] 觸發');
+				const flexJsonList = createFlexJsonList();
+				console.log('[updateCardPreview] flexJsonList', flexJsonList);
+				my_flexToHtml("flex2html_main", flexJsonList);
+			}
+
+			// 儲存卡片資料
+			async function saveCardData() {
+				try {
+					const cardData = readShowCardData();
+					const response = await sendRequest("save", userId, cardData);
+					
+					if (response.status === "ok") {
+						// 上傳 OG HTML
+						const uploadResponse = await sendRequest("uploadGithub", userId, cardData);
+						if (uploadResponse.status === "ok") {
+							console.log("OG HTML 上傳成功：", uploadResponse.uploadOG_url);
+						}
+						
+						alert("儲存成功");
+					} else {
+						alert("儲存失敗");
+					}
+				} catch (error) {
+					console.error("儲存失敗：", error);
+					alert("儲存失敗，請重試");
+				}
+			}
 
 			// 分享line按钮的點擊事件
 			function shareButtonLine() {

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>會員卡後台管理</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/common.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>會員卡後台管理</h1>
+    
+    <div class="admin-section">
+      <h2>用戶管理</h2>
+      <div class="search-box">
+        <input type="text" id="user-search" placeholder="搜尋用戶...">
+        <button onclick="searchUsers()" class="btn btn-primary">搜尋</button>
+      </div>
+      <div id="user-list"></div>
+    </div>
+
+    <div class="admin-section">
+      <h2>卡片管理</h2>
+      <div class="search-box">
+        <input type="text" id="card-search" placeholder="搜尋卡片...">
+        <button onclick="searchCards()" class="btn btn-primary">搜尋</button>
+      </div>
+      <div id="card-list"></div>
+    </div>
+  </div>
+
+  <script>
+    // 檢查管理員權限
+    async function checkAdmin() {
+      const isAdmin = await checkAdminAuth();
+      if (!isAdmin) {
+        window.location.href = '/';
+      }
+    }
+
+    // 搜尋用戶
+    async function searchUsers() {
+      try {
+        const searchTerm = document.getElementById('user-search').value;
+        const response = await fetch(`/api/admin/users/search?q=${encodeURIComponent(searchTerm)}`);
+        const { users } = await response.json();
+        
+        const userList = document.getElementById('user-list');
+        userList.innerHTML = users.map(user => `
+          <div class="user-item">
+            <p>用戶 ID: ${user.line_user_id}</p>
+            <p>名稱: ${user.name}</p>
+            <p>Email: ${user.email || '未設定'}</p>
+            <p>最後登入: ${new Date(user.last_login).toLocaleString()}</p>
+            <button onclick="viewUserCards('${user.line_user_id}')" class="btn btn-secondary">查看卡片</button>
+          </div>
+        `).join('');
+      } catch (error) {
+        console.error('搜尋用戶失敗:', error);
+        alert('搜尋用戶失敗');
+      }
+    }
+
+    // 搜尋卡片
+    async function searchCards() {
+      try {
+        const searchTerm = document.getElementById('card-search').value;
+        const response = await fetch(`/api/admin/cards/search?q=${encodeURIComponent(searchTerm)}`);
+        const { cards } = await response.json();
+        
+        const cardList = document.getElementById('card-list');
+        cardList.innerHTML = cards.map(card => `
+          <div class="card-item">
+            <p>卡片 ID: ${card.id}</p>
+            <p>用戶 ID: ${card.user_id}</p>
+            <p>建立時間: ${new Date(card.created_at).toLocaleString()}</p>
+            <p>分享次數: ${card.share_count || 0}</p>
+            <button onclick="viewCard('${card.id}')" class="btn btn-secondary">查看</button>
+            <button onclick="deleteCard('${card.id}')" class="btn btn-danger">刪除</button>
+          </div>
+        `).join('');
+      } catch (error) {
+        console.error('搜尋卡片失敗:', error);
+        alert('搜尋卡片失敗');
+      }
+    }
+
+    // 查看用戶卡片
+    async function viewUserCards(userId) {
+      try {
+        const response = await fetch(`/api/admin/users/${userId}/cards`);
+        const { cards } = await response.json();
+        
+        const cardList = document.getElementById('card-list');
+        cardList.innerHTML = cards.map(card => `
+          <div class="card-item">
+            <p>卡片 ID: ${card.id}</p>
+            <p>建立時間: ${new Date(card.created_at).toLocaleString()}</p>
+            <p>分享次數: ${card.share_count || 0}</p>
+            <button onclick="viewCard('${card.id}')" class="btn btn-secondary">查看</button>
+            <button onclick="deleteCard('${card.id}')" class="btn btn-danger">刪除</button>
+          </div>
+        `).join('');
+      } catch (error) {
+        console.error('查看用戶卡片失敗:', error);
+        alert('查看用戶卡片失敗');
+      }
+    }
+
+    // 查看卡片詳情
+    async function viewCard(cardId) {
+      try {
+        const response = await fetch(`/api/admin/cards/${cardId}`);
+        const { card } = await response.json();
+        
+        alert(JSON.stringify(card.content, null, 2));
+      } catch (error) {
+        console.error('查看卡片失敗:', error);
+        alert('查看卡片失敗');
+      }
+    }
+
+    // 刪除卡片
+    async function deleteCard(cardId) {
+      if (!confirm('確定要刪除這張卡片嗎？')) {
+        return;
+      }
+
+      try {
+        const response = await fetch(`/api/admin/cards/delete?cardId=${cardId}`, {
+          method: 'DELETE'
+        });
+
+        if (response.ok) {
+          alert('卡片刪除成功');
+          searchCards();
+        } else {
+          throw new Error('刪除失敗');
+        }
+      } catch (error) {
+        console.error('刪除卡片失敗:', error);
+        alert('刪除卡片失敗');
+      }
+    }
+
+    // 頁面載入時檢查權限
+    document.addEventListener('DOMContentLoaded', checkAdmin);
+  </script>
+</body>
+</html> 

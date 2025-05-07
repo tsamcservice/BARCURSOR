@@ -405,4 +405,19 @@ function test() {
 ### 5.3 錯誤處理
 1. 定期檢查 GAS 執行日誌
 2. 監控 Sheet 資料的完整性
-3. 確保 API 呼叫的正確性 
+3. 確保 API 呼叫的正確性
+
+## 維護與日誌建議
+
+### 常見錯誤與解法
+- API 無回應或資料異常：請檢查 Sheet 權限與部署網址。
+- 讀取數未增加：請確認前端有呼叫 addReadCount，並檢查 doGet 的 status 判斷。
+- OG 未產生：請檢查 uploadOG_html 是否有正確呼叫 Vercel API，並於 GAS 日誌中觀察錯誤訊息。
+
+### 日誌建議
+- 建議於每次 doGet、doPost、uploadOG_html 等關鍵函數中，使用 Logger.log 或 console.log 記錄參數與回傳值，方便除錯。
+- 若遇到資料異常，請先於 GAS IDE 的「執行記錄」中查詢日誌。
+
+---
+
+## 近期維護紀錄請見 CHANGELOG.md 

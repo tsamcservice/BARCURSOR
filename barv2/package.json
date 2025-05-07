@@ -1,0 +1,16 @@
+{
+  "name": "barv2",
+  "version": "1.0.0",
+  "description": "LINE Flex Message 即時編輯器",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0"
+  },
+  "devDependencies": {
+    "vercel": "^32.0.0"
+  }
+} 

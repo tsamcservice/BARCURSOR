@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LINE Flex Message 預覽編輯器</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="editor-section">
+            <h2>JSON 編輯器</h2>
+            <textarea id="jsonEditor" class="json-editor"></textarea>
+            <div class="button-group">
+                <button id="previewBtn">預覽</button>
+                <button id="saveBtn">儲存</button>
+                <button id="shareBtn">分享</button>
+            </div>
+        </div>
+        
+        <div class="preview-section">
+            <h2>預覽</h2>
+            <div id="previewContainer" class="preview-container"></div>
+        </div>
+
+        <div class="quick-edit-section">
+            <h2>快速編輯</h2>
+            <div class="edit-fields">
+                <div class="field-group">
+                    <label for="mainTitle">主標題</label>
+                    <input type="text" id="mainTitle" class="edit-field">
+                </div>
+                <div class="field-group">
+                    <label for="subTitle">副標題</label>
+                    <input type="text" id="subTitle" class="edit-field">
+                </div>
+                <div class="field-group">
+                    <label for="textColor">文字顏色</label>
+                    <input type="color" id="textColor" class="edit-field">
+                </div>
+                <div class="field-group">
+                    <label for="buttonText">按鈕文字</label>
+                    <input type="text" id="buttonText" class="edit-field">
+                </div>
+                <div class="field-group">
+                    <label for="buttonUrl">按鈕連結</label>
+                    <input type="url" id="buttonUrl" class="edit-field">
+                </div>
+            </div>
+        </div>
+
+        <div class="image-upload-section">
+            <h2>圖片上傳</h2>
+            <div class="upload-areas">
+                <div class="upload-area">
+                    <h3>VIP 圖片</h3>
+                    <input type="file" id="vipImage" accept="image/*">
+                    <div id="vipPreview" class="image-preview"></div>
+                </div>
+                <div class="upload-area">
+                    <h3>公用圖片</h3>
+                    <input type="file" id="publicImage" accept="image/*">
+                    <div id="publicPreview" class="image-preview"></div>
+                </div>
+                <div class="upload-area">
+                    <h3>個人圖片</h3>
+                    <input type="file" id="userImage" accept="image/*">
+                    <div id="userPreview" class="image-preview"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/preview.js"></script>
+    <script src="js/editor.js"></script>
+    <script src="js/upload.js"></script>
+</body>
+</html> 

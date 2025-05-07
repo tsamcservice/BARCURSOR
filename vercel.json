@@ -2,69 +2,29 @@
   "version": 2,
   "builds": [
     {
-      "src": "NEW_LINECARD/**/*",
+      "src": "NEW_LINECARD/preview-editor/**/*",
       "use": "@vercel/static"
+    },
+    {
+      "src": "NEW_LINECARD/preview-editor/api/**/*.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/",
-      "dest": "/NEW_LINECARD/index.html"
+      "src": "/preview-editor/api/(.*)",
+      "dest": "/NEW_LINECARD/preview-editor/api/$1"
     },
     {
-      "src": "/card/?*",
-      "dest": "/NEW_LINECARD/card/index.html"
-    },
-    {
-      "src": "/preview/?*",
-      "dest": "/NEW_LINECARD/preview/index.html"
-    },
-    {
-      "src": "/share/?*",
-      "dest": "/NEW_LINECARD/share/index.html"
-    },
-    {
-      "src": "/css/(.*)",
-      "dest": "/NEW_LINECARD/css/$1"
-    },
-    {
-      "src": "/js/(.*)",
-      "dest": "/NEW_LINECARD/js/$1"
-    },
-    {
-      "src": "/data/(.*)",
-      "dest": "/NEW_LINECARD/data/$1"
-    },
-    {
-      "src": "/fancybox/(.*)",
-      "dest": "/NEW_LINECARD/fancybox/$1"
-    },
-    {
-      "src": "/download_card/(.*)",
-      "dest": "/NEW_LINECARD/download_card/$1"
-    },
-    {
-      "src": "/test/(.*)",
-      "dest": "/NEW_LINECARD/test/$1"
-    },
-    {
-      "src": "/archives/(.*)",
-      "dest": "/NEW_LINECARD/archives/$1"
-    },
-    {
-      "src": "/about/(.*)",
-      "dest": "/NEW_LINECARD/about/$1"
-    },
-    {
-      "src": "/og_html/(.*)",
-      "dest": "/NEW_LINECARD/og_html/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/NEW_LINECARD/$1"
+      "src": "/preview-editor/(.*)",
+      "dest": "/NEW_LINECARD/preview-editor/$1"
     }
   ],
   "env": {
-    "LIFF_ID": "2007327814-DGly5XNk"
+    "SUPABASE_URL": "@supabase_url",
+    "SUPABASE_KEY": "@supabase_key",
+    "LINE_CHANNEL_ID": "2007327902",
+    "LINE_CHANNEL_SECRET": "ddd0d925d78bcf03722931d49ff27a75",
+    "LINE_CHANNEL_ACCESS_TOKEN": "Ldq2Q7r5XtI8wuNuKA+zBmthI2ytWHfHXofMsBWIXnFMRqPjFnFQTRVtr89G/l3+fvIjt4+qPTr9nUAbOLUhLz3pcxgTLZRUQ5v2C9zHEIvUgaQ81asWrepPs1JBcKAYYqrRVDwsHR3lZ/eE7vSi2AdB04t89/1O/w1cDnyilFU="
   }
 } 

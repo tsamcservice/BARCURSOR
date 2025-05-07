@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- 載入資料 -->
-	<script src="https://tsamcservice.github.io/BARCURSOR/NEW_LINECARD/data/common.js"></script>
-	<script src="https://tsamcservice.github.io/BARCURSOR/NEW_LINECARD/data/data.js"></script>
-	<link rel="stylesheet" type="text/css" href="https://tsamcservice.github.io/BARCURSOR/NEW_LINECARD/data/styles.css">
+	<!-- 載入資料（改為 Vercel /data/ 路徑） -->
+	<script src="/data/common.js"></script>
+	<script src="/data/data.js"></script>
+	<link rel="stylesheet" type="text/css" href="/data/styles.css">
 	<!-- flex2html -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/PamornT/flex2html@main/css/flex2html.css" />
 	<script src="https://cdn.jsdelivr.net/gh/PamornT/flex2html@main/js/flex2html.min.js"></script>
@@ -61,9 +61,15 @@
 			displayName = data_card.displayName || displayName;
 			textColor = data_card.textColor || textColor;
 
-			// 創立並更新 flexJsonList 內容 (改變內部變數)
-			flexJsonList = createFlexJsonList()
-			// 將 flexJson 繪出到 HTML 上 (flexJsonList框已在data.js)
+			// 取得 card_json[0] 作為 flexJsonStatic
+			if (window.flexJsonStaticFromSheet) {
+				flexJsonStatic = window.flexJsonStaticFromSheet;
+			}
+			console.log('[preview] 欄位資料', {
+				mainTitle_1, mainTitle_2, memberId, subTitle_2, textContent_1, textContent_1_url, textContent_2, textContent_2_url, displayName, textColor
+			});
+			flexJsonList = createFlexJsonList();
+			console.log('[preview] flexJsonList', flexJsonList);
 			my_flexToHtml("flex2html_main", flexJsonList);
 		}
 
@@ -71,9 +77,7 @@
 			document.getElementById('loader').style.display = 'flex';
 			// 獲取查詢字串
 			var queryString = window.location.search;
-			// 移除第一個問號字元 (?)
 			queryString = queryString.slice(1);
-			// 遍歷全部參數，將其拆分為參數名和值，並存到對象中
 			var parameters = {};
 			queryString.split('&').forEach(pair => {
 				const [paramName, paramValue] = pair.split('=').map(decodeURIComponent);
@@ -82,21 +86,20 @@
 
 			userId = parameters["userId"];
 			async function send() {
-				// 向google sheet發送的增加閱讀數
 				await sendRequest("addReadCount", userId);
-				// 取得卡片資料
 				var responseData = await sendRequest("get", userId);
 				if (responseData.status === 'ok') {
 					// 會員卡片 cardJson[0] 讀取並紀錄存下 (flexJsonStatic框已在data.js)
-					flexJsonStatic = responseData.cardJson[0]
-					// 會員卡片 參數寫入
+					flexJsonStatic = responseData.cardJson[0];
+					window.flexJsonStaticFromSheet = flexJsonStatic;
+					console.log('[preview] flexJsonStatic 來自 cardJson[0]：', flexJsonStatic);
 					const data_card = JSON.parse(responseData.card);
 					createFlex(data_card);
 					document.getElementById('readCount').innerHTML = "觀看人數：" + parseInt(responseData.readCount);
 					document.getElementById('loader').style.display = 'none';
 				}
 			}
-			send()
+			send();
 		}
 	</script>
 

@@ -1,215 +1,169 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-TW">
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="CardJsonParams Demo    	  	  		console.log(CardJsonParams.mainTitle_1); 		CardJsonParams.mainTitle_1 &#x3D; 1; 		console.log(CardJsonParams.mainTitle_1);   		function otherFunction() { 			console.lo">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://tsamcservice.github.io/test/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="CardJsonParams Demo    	  	  		console.log(CardJsonParams.mainTitle_1); 		CardJsonParams.mainTitle_1 &#x3D; 1; 		console.log(CardJsonParams.mainTitle_1);   		function otherFunction() { 			console.lo">
-<meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2023-06-17T07:26:49.522Z">
-<meta property="article:modified_time" content="2023-06-17T07:26:49.522Z">
-<meta property="article:author" content="tsamcservice">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
-
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
-  
-<meta name="generator" content="Hexo 6.3.0"></head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">歡迎來到這裡</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜尋"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://tsamcservice.github.io"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main"><article id="page-" class="h-entry article article-type-page" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/test/index.html" class="article-date">
-  <time class="dt-published" datetime="2023-06-17T07:26:49.522Z" itemprop="datePublished">2023-06-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <!DOCTYPE html>
-<html>
-
-<head>
-	<meta charset="UTF-8">
-	<title>CardJsonParams Demo</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>會員卡測試頁面</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 </head>
-
 <body>
-	<script src="https://tsamcservice.github.io/BARCURSOR/NEW_LINECARD/data/data.js"></script>
-	<link rel="stylesheet" type="text/css" href="https://tsamcservice.github.io/BARCURSOR/NEW_LINECARD/data/styles.css">
-
-	<script>
-
-		console.log(CardJsonParams.mainTitle_1);
-		CardJsonParams.mainTitle_1 = 1;
-		console.log(CardJsonParams.mainTitle_1);
-
-
-		function otherFunction() {
-			console.log(CardJsonParams.mainTitle_1);
-		}
-
-		otherFunction();
-	</script>
-</body>
-
-</html>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://tsamcservice.github.io/test/index.html" data-id="cljgrp0ma00083wvidsg482al" data-title="" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
+  <div class="container">
+    <h1>會員卡測試頁面</h1>
     
-  
-</article>
+    <div class="test-section">
+      <h2>LIFF 功能測試</h2>
+      <div id="liff-status">LIFF 狀態：載入中...</div>
+      <div id="user-info">用戶資訊：載入中...</div>
+      <button onclick="testShare()" class="btn btn-primary">測試分享功能</button>
+    </div>
 
+    <div class="test-section">
+      <h2>卡片功能測試</h2>
+      <button onclick="testCreateCard()" class="btn btn-primary">建立測試卡片</button>
+      <button onclick="testListCards()" class="btn btn-secondary">列出卡片</button>
+      <div id="card-list"></div>
+    </div>
+  </div>
 
-</section>
+  <script>
+    // 初始化 LIFF
+    async function initLiff() {
+      try {
+        await liff.init({ liffId: '2007327814-BdWpj70m' });
+        document.getElementById('liff-status').textContent = 'LIFF 狀態：已初始化';
         
-          <aside id="sidebar">
-  
-    
+        if (!liff.isLoggedIn()) {
+          liff.login();
+        } else {
+          const profile = await liff.getProfile();
+          document.getElementById('user-info').textContent = `用戶資訊：${profile.displayName}`;
+        }
+      } catch (error) {
+        console.error('LIFF 初始化失敗:', error);
+        document.getElementById('liff-status').textContent = 'LIFF 狀態：初始化失敗';
+      }
+    }
 
-  
-    
+    // 測試分享功能
+    async function testShare() {
+      try {
+        const testCard = {
+          type: 'bubble',
+          body: {
+            type: 'box',
+            layout: 'vertical',
+            contents: [
+              {
+                type: 'text',
+                text: '測試卡片',
+                weight: 'bold',
+                size: 'xl'
+              }
+            ]
+          }
+        };
 
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">彙整</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a></li></ul>
-    </div>
-  </div>
+        if (liff.isApiAvailable('shareTargetPicker')) {
+          await liff.shareTargetPicker([
+            {
+              type: 'flex',
+              altText: '測試卡片',
+              contents: testCard
+            }
+          ]);
+        } else {
+          alert('shareTargetPicker 不可用');
+        }
+      } catch (error) {
+        console.error('分享測試失敗:', error);
+        alert('分享測試失敗');
+      }
+    }
 
+    // 測試建立卡片
+    async function testCreateCard() {
+      try {
+        const profile = await liff.getProfile();
+        const testCard = {
+          type: 'bubble',
+          body: {
+            type: 'box',
+            layout: 'vertical',
+            contents: [
+              {
+                type: 'text',
+                text: '測試卡片',
+                weight: 'bold',
+                size: 'xl'
+              }
+            ]
+          }
+        };
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
+        const response = await fetch('/api/cards/save', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            cardData: testCard,
+            userId: profile.userId
+          })
+        });
+
+        const result = await response.json();
+        alert('測試卡片建立成功');
+        testListCards();
+      } catch (error) {
+        console.error('建立測試卡片失敗:', error);
+        alert('建立測試卡片失敗');
+      }
+    }
+
+    // 測試列出卡片
+    async function testListCards() {
+      try {
+        const profile = await liff.getProfile();
+        const response = await fetch(`/api/cards/list?userId=${profile.userId}`);
+        const { cards } = await response.json();
         
-          <li>
-            <a href="/index.html">index</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
+        const cardList = document.getElementById('card-list');
+        cardList.innerHTML = cards.map(card => `
+          <div class="card-item">
+            <p>卡片 ID: ${card.id}</p>
+            <p>建立時間: ${new Date(card.created_at).toLocaleString()}</p>
+            <button onclick="testDeleteCard('${card.id}')" class="btn btn-secondary">刪除</button>
+          </div>
+        `).join('');
+      } catch (error) {
+        console.error('列出卡片失敗:', error);
+        alert('列出卡片失敗');
+      }
+    }
 
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2023 tsamcservice<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
+    // 測試刪除卡片
+    async function testDeleteCard(cardId) {
+      try {
+        const profile = await liff.getProfile();
+        const response = await fetch(`/api/cards/delete?cardId=${cardId}&userId=${profile.userId}`, {
+          method: 'DELETE'
+        });
 
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
+        if (response.ok) {
+          alert('卡片刪除成功');
+          testListCards();
+        } else {
+          throw new Error('刪除失敗');
+        }
+      } catch (error) {
+        console.error('刪除卡片失敗:', error);
+        alert('刪除卡片失敗');
+      }
+    }
 
-
-<script src="/js/jquery-3.4.1.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
+    // 頁面載入時初始化
+    document.addEventListener('DOMContentLoaded', initLiff);
+  </script>
 </body>
 </html>

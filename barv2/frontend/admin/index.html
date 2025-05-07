@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>後台管理</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="admin-container">
+            <div class="admin-section">
+                <h2>使用者管理</h2>
+                <div class="search-box">
+                    <input type="text" id="userSearch" placeholder="搜尋使用者...">
+                    <button onclick="searchUsers()">搜尋</button>
+                </div>
+                <div id="userList" class="list-container"></div>
+            </div>
+            <div class="admin-section">
+                <h2>卡片管理</h2>
+                <div class="search-box">
+                    <input type="text" id="cardSearch" placeholder="搜尋卡片...">
+                    <button onclick="searchCards()">搜尋</button>
+                </div>
+                <div id="cardList" class="list-container"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // 檢查管理員權限
+        async function checkAdminAuth() {
+            const username = prompt('請輸入管理員帳號');
+            const password = prompt('請輸入管理員密碼');
+            
+            if (username === 'admin' && password === 'admin55688') {
+                return true;
+            }
+            return false;
+        }
+
+        // 搜尋使用者
+        async function searchUsers() {
+            if (!await checkAdminAuth()) {
+                alert('無權限存取');
+                return;
+            }
+
+            const query = document.getElementById('userSearch').value;
+            try {
+                const response = await fetch(`/api/admin/users/search?query=${encodeURIComponent(query)}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    const userList = document.getElementById('userList');
+                    userList.innerHTML = data.users.map(user => `
+                        <div class="list-item">
+                            <div>ID: ${user.id}</div>
+                            <div>名稱: ${user.name}</div>
+                            <div>Email: ${user.email}</div>
+                            <button onclick="viewUserCards('${user.id}')">查看卡片</button>
+                        </div>
+                    `).join('');
+                }
+            } catch (error) {
+                console.error('搜尋使用者錯誤:', error);
+                alert('搜尋失敗');
+            }
+        }
+
+        // 搜尋卡片
+        async function searchCards() {
+            if (!await checkAdminAuth()) {
+                alert('無權限存取');
+                return;
+            }
+
+            const query = document.getElementById('cardSearch').value;
+            try {
+                const response = await fetch(`/api/admin/cards/search?query=${encodeURIComponent(query)}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    const cardList = document.getElementById('cardList');
+                    cardList.innerHTML = data.cards.map(card => `
+                        <div class="list-item">
+                            <div>ID: ${card.id}</div>
+                            <div>類型: ${card.type}</div>
+                            <div>建立時間: ${new Date(card.created_at).toLocaleString()}</div>
+                            <button onclick="viewCard('${card.id}')">查看</button>
+                            <button onclick="deleteCard('${card.id}')">刪除</button>
+                        </div>
+                    `).join('');
+                }
+            } catch (error) {
+                console.error('搜尋卡片錯誤:', error);
+                alert('搜尋失敗');
+            }
+        }
+
+        // 查看使用者卡片
+        async function viewUserCards(userId) {
+            try {
+                const response = await fetch(`/api/cards/list?userId=${userId}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    const cardList = document.getElementById('cardList');
+                    cardList.innerHTML = data.cards.map(card => `
+                        <div class="list-item">
+                            <div>ID: ${card.id}</div>
+                            <div>類型: ${card.type}</div>
+                            <div>建立時間: ${new Date(card.created_at).toLocaleString()}</div>
+                            <button onclick="viewCard('${card.id}')">查看</button>
+                            <button onclick="deleteCard('${card.id}')">刪除</button>
+                        </div>
+                    `).join('');
+                }
+            } catch (error) {
+                console.error('查看使用者卡片錯誤:', error);
+                alert('查看失敗');
+            }
+        }
+
+        // 查看卡片
+        function viewCard(cardId) {
+            window.open(`/preview/?cardId=${cardId}`, '_blank');
+        }
+
+        // 刪除卡片
+        async function deleteCard(cardId) {
+            if (!await checkAdminAuth()) {
+                alert('無權限存取');
+                return;
+            }
+
+            if (!confirm('確定要刪除此卡片？')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/admin/cards/delete?cardId=${cardId}`, {
+                    method: 'DELETE'
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    alert('卡片已刪除');
+                    searchCards();
+                } else {
+                    alert('刪除失敗：' + data.message);
+                }
+            } catch (error) {
+                console.error('刪除卡片錯誤:', error);
+                alert('刪除失敗');
+            }
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            checkAdminAuth();
+        });
+    </script>
+</body>
+</html> 
