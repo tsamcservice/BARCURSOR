@@ -1,6 +1,6 @@
 // google Apps Script 傳送訊息
 async function sendRequest(status, userId, dataCard = "", isDebug = true) {
-	const url = "https://script.google.com/macros/s/AKfycbwfy6NZbWcrhc9KSQtMC2bcAWaGI_T4ASU42d8h4Jk0qNLHktnFJAynGJxcNV5QaLTrYA/exec";
+	const url = "https://script.google.com/macros/s/AKfycbyGQFtVNh6W1n9HpBasraQSp2A7VNsuy_68eRkGzpBXEjXIZNpzGAr3FT8clgp3sPzM3g/exec";
 	const data = {
 		status: status,
 		userId: userId,

@@ -1,5 +1,5 @@
 // LIFF ID 設定
-const googleAppsScriptUrl = "https://script.google.com/macros/s/AKfycbwfy6NZbWcrhc9KSQtMC2bcAWaGI_T4ASU42d8h4Jk0qNLHktnFJAynGJxcNV5QaLTrYA/exec";
+const googleAppsScriptUrl = "https://script.google.com/macros/s/AKfycbyGQFtVNh6W1n9HpBasraQSp2A7VNsuy_68eRkGzpBXEjXIZNpzGAr3FT8clgp3sPzM3g/exec";
 const shareLIFFid = "2007327814-DGly5XNk";
 
 // 這張會員卡片的 URL

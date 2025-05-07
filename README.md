@@ -6,13 +6,15 @@
   - `NEW_BRIDGE.gs` - 橋接服務，處理前端與後端的資料交換
   - `NEW_REPLY.gs` - 回覆服務，處理 LINE Webhook 回覆
 - `NEW_LINECARD/` - LINE 卡片前端應用
-  - `index.html` - 主頁面
-  - `card/` - 卡片編輯頁面
+  - `index.html` - 網頁主頁
+  - `card/` - 卡片編輯主頁面
   - `preview/` - 預覽頁面
   - `share/` - 分享頁面
   - `css/` - 樣式檔案
   - `js/` - JavaScript 檔案
   - `data/` - 資料檔案
+- `OG_HTML/` - Open Graph HTML 卡片
+  - `og_html/` - 存放動態生成的 Open Graph HTML 檔案
 - `api/` - Vercel API 路由
   - `upload.js` - 處理檔案上傳
 
@@ -26,6 +28,7 @@
   - 處理卡片資料的讀取和儲存
   - 管理使用者 ID 對應
   - 上傳 OG HTML 到 Vercel
+  - 備份資料到 Google Sheets
 - **主要 API 端點**：
   - `doGet`：處理 GET 請求
     - `status=get`：取得卡片資料
@@ -51,21 +54,33 @@
   - `data/data.js`：卡片資料和預設值
   - `data/common.js`：共用函數和 API 呼叫
 
-### 3. Vercel API 實現
+### 3. OG_HTML 實現
 
 - **功能**：
-  - 處理 OG HTML 檔案上傳
-  - 提供靜態檔案服務
-- **路由**：
-  - `/api/upload`：處理檔案上傳
-  - `/og_html/*`：提供 OG HTML 檔案訪問
+  - 動態生成 Open Graph HTML
+  - 提供靜態 URL 供分享
+- **生成方式**：
+  - 由 NEW_BRIDGE 服務動態生成
+  - 上傳到 Vercel
+  - 提供靜態訪問 URL
+
+### 4. 資料備份
+
+- **Google Sheets**：
+  - 存放使用者資料
+  - 備份卡片資訊
+  - 記錄閱讀次數
+- **Vercel**：
+  - 部署前端應用
+  - 提供 API 服務
+  - 存放 OG HTML 檔案
 
 ## 部署資訊
 
 ### 1. GAS 部署
 - NEW_BRIDGE
-  - 部署ID: AKfycbwfy6NZbWcrhc9KSQtMC2bcAWaGI_T4ASU42d8h4Jk0qNLHktnFJAynGJxcNV5QaLTrYA
-  - 網址: https://script.google.com/macros/s/AKfycbwfy6NZbWcrhc9KSQtMC2bcAWaGI_T4ASU42d8h4Jk0qNLHktnFJAynGJxcNV5QaLTrYA/exec
+  - 部署ID: AKfycbyGQFtVNh6W1n9HpBasraQSp2A7VNsuy_68eRkGzpBXEjXIZNpzGAr3FT8clgp3sPzM3g
+  - 網址: https://script.google.com/macros/s/AKfycbyGQFtVNh6W1n9HpBasraQSp2A7VNsuy_68eRkGzpBXEjXIZNpzGAr3FT8clgp3sPzM3g/exec
 
 - NEW_REPLY
   - 部署ID: AKfycby-fQGSUcabNBTdpTeGeTUvJgz1DZjv-5BBXUoobDXK7HBZWgEFcisK47D5M4oP-0-L
@@ -85,6 +100,7 @@
 - 分支: master (default)
 - 備份路徑:
   - 前端程式碼: /NEW_LINECARD
+  - OG HTML: /OG_HTML
   - API 路由: /api
   - GAS 程式碼: /GAS
 
@@ -110,7 +126,7 @@
 - 分享頁面: https://barcursor-kt0y1qoip-tsamcservices-projects.vercel.app/share
 
 ### 2. API 測試
-- NEW_BRIDGE API: https://script.google.com/macros/s/AKfycbwfy6NZbWcrhc9KSQtMC2bcAWaGI_T4ASU42d8h4Jk0qNLHktnFJAynGJxcNV5QaLTrYA/exec
+- NEW_BRIDGE API: https://script.google.com/macros/s/AKfycbyGQFtVNh6W1n9HpBasraQSp2A7VNsuy_68eRkGzpBXEjXIZNpzGAr3FT8clgp3sPzM3g/exec
 - NEW_REPLY API: https://script.google.com/macros/s/AKfycby-fQGSUcabNBTdpTeGeTUvJgz1DZjv-5BBXUoobDXK7HBZWgEFcisK47D5M4oP-0-L/exec
 
 ## 維護與更新
@@ -121,11 +137,11 @@
 3. 測試 API 功能
 
 ### 2. Vercel 更新
-1. 推送更改到 GitHub
-2. Vercel 會自動部署
-3. 確認部署狀態和功能
+1. 在本機端使用 Vercel CLI 部署
+2. 確認部署狀態和功能
+3. 檢查 API 路由是否正常
 
 ### 3. 資料維護
-1. 定期備份資料
+1. 定期備份資料到 Google Sheets
 2. 檢查資料格式
 3. 更新使用者對應表 
