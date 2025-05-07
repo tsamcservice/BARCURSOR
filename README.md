@@ -70,8 +70,8 @@
 
 ### 1. GAS 部署
 - NEW_BRIDGE
-  - 部署ID: AKfycbyWlV6JwSl2Jzwrc6NLvCplTYylN6fhn-_rwKg4gBKiZ3QUIDP8OGmEgJJzJWVxCwiB7w
-  - 網址: https://script.google.com/macros/s/AKfycbyWlV6JwSl2Jzwrc6NLvCplTYylN6fhn-_rwKg4gBKiZ3QUIDP8OGmEgJJzJWVxCwiB7w/exec
+  - 部署ID: AKfycbwfy6NZbWcrhc9KSQtMC2bcAWaGI_T4ASU42d8h4Jk0qNLHktnFJAynGJxcNV5QaLTrYA
+  - 網址: https://script.google.com/macros/s/AKfycbwfy6NZbWcrhc9KSQtMC2bcAWaGI_T4ASU42d8h4Jk0qNLHktnFJAynGJxcNV5QaLTrYA/exec
 
 - NEW_REPLY
   - 部署ID: AKfycby-fQGSUcabNBTdpTeGeTUvJgz1DZjv-5BBXUoobDXK7HBZWgEFcisK47D5M4oP-0-L

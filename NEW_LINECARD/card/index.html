@@ -259,7 +259,7 @@
 									userId = profile.userId;
 									displayName = profile.displayName;
 									// 取得 google sheet 個人資料
-									var responseData = await sendRequest("get", userId);
+									var responseData = await sendRequest("get", userId, null, "https://script.google.com/macros/s/AKfycbwfy6NZbWcrhc9KSQtMC2bcAWaGI_T4ASU42d8h4Jk0qNLHktnFJAynGJxcNV5QaLTrYA/exec");
 									if (responseData.status == "first") {
 										await sendRequest("save", userId, readShowCardData());
 										var responseData = await sendRequest("get", userId);

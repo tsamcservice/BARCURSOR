@@ -375,8 +375,8 @@ function test() {
 6. 部署為網頁應用程式：
    - 執行身份：以執行此應用程式的使用者身份
    - 存取權限：任何人
-7. 部署 ID: AKfycbyWlV6JwSl2Jzwrc6NLvCplTYylN6fhn-_rwKg4gBKiZ3QUIDP8OGmEgJJzJWVxCwiB7w
-8. 部署 URL: https://script.google.com/macros/s/AKfycbyWlV6JwSl2Jzwrc6NLvCplTYylN6fhn-_rwKg4gBKiZ3QUIDP8OGmEgJJzJWVxCwiB7w/exec
+7. 部署 ID: AKfycbwfy6NZbWcrhc9KSQtMC2bcAWaGI_T4ASU42d8h4Jk0qNLHktnFJAynGJxcNV5QaLTrYA
+8. 部署 URL: https://script.google.com/macros/s/AKfycbwfy6NZbWcrhc9KSQtMC2bcAWaGI_T4ASU42d8h4Jk0qNLHktnFJAynGJxcNV5QaLTrYA/exec
 
 ### 4.2 NEW_REPLY 部署
 1. 前往 [Google Apps Script](https://script.google.com/)
