@@ -150,6 +150,35 @@ flowchart LR
 2. 確認檔案路徑
 3. 檢查 HTML 格式
 
+### 6.4 LIFF ID 問題排查流程
+1. **問題描述**：
+   - 網站可能使用錯誤的 LIFF ID (2000001236-On1R22VW)
+   - 正確的 LIFF ID 應為：2007327814-DGly5XNk
+
+2. **檢查點**：
+   - GAS 返回的 cardJson 內容
+   - flexJsonStatic 的內容
+   - URL 替換過程
+   - 最終生成的 flexJsonList
+
+3. **除錯工具**：
+   ```javascript
+   // common.js 中的除錯代碼
+   console.log("Debug - Response cardJson:", responseData.cardJson);
+   console.log("Debug - cardJson[0] LIFF ID check:", responseData.cardJson[0].match(/2000001236-On1R22VW|2007327814-DGly5XNk/g));
+
+   // data.js 中的除錯代碼
+   console.log("Debug - flexJsonStatic:", flexJsonStatic);
+   console.log("Debug - Before URL replacement:", flexJsonList.match(/S{3,}/g));
+   console.log("Debug - Final flexJsonList:", flexJsonList);
+   ```
+
+4. **排查步驟**：
+   - 清除瀏覽器快取
+   - 開啟瀏覽器開發者工具（F12）
+   - 重新載入頁面
+   - 檢查 console 輸出
+
 ## 7. 重要注意事項
 
 ### 7.1 路徑設定

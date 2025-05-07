@@ -70,19 +70,58 @@
 
 ### 1. GAS 部署
 - NEW_BRIDGE
-  - 部署ID: AKfycbytOQjUDPdHvPwn9CAtsNc9VyB356gakqEEBDVsA0J90J21fKcbsMX_FrihdjqJ8KyY
-  - 網址: https://script.google.com/macros/s/AKfycbytOQjUDPdHvPwn9CAtsNc9VyB356gakqEEBDVsA0J90J21fKcbsMX_FrihdjqJ8KyY/exec
+  - 部署ID: AKfycbyWlV6JwSl2Jzwrc6NLvCplTYylN6fhn-_rwKg4gBKiZ3QUIDP8OGmEgJJzJWVxCwiB7w
+  - 網址: https://script.google.com/macros/s/AKfycbyWlV6JwSl2Jzwrc6NLvCplTYylN6fhn-_rwKg4gBKiZ3QUIDP8OGmEgJJzJWVxCwiB7w/exec
 
 - NEW_REPLY
-  - 部署ID: AKfycbwZIJQ7toOMi4-IzStW6VW5WhRrWLPlbEgIc2t-waWgxoHD-wHBEi-1OmqV7YpU5cSW
-  - 網址: https://script.google.com/macros/s/AKfycbwZIJQ7toOMi4-IzStW6VW5WhRrWLPlbEgIc2t-waWgxoHD-wHBEi-1OmqV7YpU5cSW/exec
+  - 部署ID: AKfycby-fQGSUcabNBTdpTeGeTUvJgz1DZjv-5BBXUoobDXK7HBZWgEFcisK47D5M4oP-0-L
+  - 網址: https://script.google.com/macros/s/AKfycby-fQGSUcabNBTdpTeGeTUvJgz1DZjv-5BBXUoobDXK7HBZWgEFcisK47D5M4oP-0-L/exec
 
-### 2. GitHub 部署
+### 2. Vercel 部署
+- 主網域: https://barcursor-kt0y1qoip-tsamcservices-projects.vercel.app
+- 部署路徑:
+  - 主頁面: /
+  - 卡片頁面: /card
+  - 預覽頁面: /preview
+  - 分享頁面: /share
+
+### 3. GitHub 備份
 - 主倉庫: BARCURSOR
 - 分支: master (default)
-- 部署路徑:
-  - NEW_LINECARD: https://tsamcservice.github.io/BARCURSOR/NEW_LINECARD/
-  - OG_HTML: https://tsamcservice.github.io/BARCURSOR/OG_HTML/
+- 備份路徑:
+  - 前端程式碼: /NEW_LINECARD
+  - OG HTML: /OG_HTML
+  - GAS 程式碼: /GAS
+
+## LINE 設定資訊
+
+### 1. LINE Bot 設定
+- Channel ID: 2007327902
+- Channel Secret: ddd0d925d78bcf03722931d49ff27a75
+- Channel Access Token: Ldq2Q7r5XtI8wuNuKA+zBmthI2ytWHfHXofMsBWIXnFMRqPjFnFQTRVtr89G/l3+fvIjt4+qPTr9nUAbOLUhLz3pcxgTLZRUQ5v2C9zHEIvUgaQ81asWrepPs1JBcKAYYqrRVDwsHR3lZ/eE7vSi2AdB04t89/1O/w1cDnyilFU=
+- Webhook URL: https://script.google.com/macros/s/AKfycby-fQGSUcabNBTdpTeGeTUvJgz1DZjv-5BBXUoobDXK7HBZWgEFcisK47D5M4oP-0-L/exec
+
+### 2. LIFF 設定
+- LIFF ID: 2007327814-DGly5XNk
+- LIFF URL: https://liff.line.me/2007327814-DGly5XNk
+- 端點 URL: https://barcursor-kt0y1qoip-tsamcservices-projects.vercel.app
+
+## 測試連結
+
+### 1. 功能測試
+- 主頁面: https://barcursor-kt0y1qoip-tsamcservices-projects.vercel.app
+- 卡片頁面: https://barcursor-kt0y1qoip-tsamcservices-projects.vercel.app/card
+- 預覽頁面: https://barcursor-kt0y1qoip-tsamcservices-projects.vercel.app/preview
+- 分享頁面: https://barcursor-kt0y1qoip-tsamcservices-projects.vercel.app/share
+
+### 2. API 測試
+- NEW_BRIDGE API: https://script.google.com/macros/s/AKfycbyWlV6JwSl2Jzwrc6NLvCplTYylN6fhn-_rwKg4gBKiZ3QUIDP8OGmEgJJzJWVxCwiB7w/exec
+- NEW_REPLY API: https://script.google.com/macros/s/AKfycby-fQGSUcabNBTdpTeGeTUvJgz1DZjv-5BBXUoobDXK7HBZWgEFcisK47D5M4oP-0-L/exec
+
+### 3. LINE Bot 測試
+- 掃描 QR Code 加入好友
+- 輸入「顯示名片」測試功能
+- 分享名片給其他使用者
 
 ## 敏感資訊管理
 

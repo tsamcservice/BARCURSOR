@@ -1,30 +1,25 @@
-# GAS 部署說明
+# GAS 部署指南
 
-## 工作流程說明
+## 1. 環境變數設定
 
-### 1. 程式碼管理
-- 所有 GAS 程式碼的修改都應該在 `GAS_DEPLOY.MD` 中進行
-- 本機端的 `.json` 檔案僅用於版本控制，不應直接修改
-- 程式碼分為兩個主要服務：
-  - NEW_BRIDGE：4 個主要函數
-  - NEW_REPLY：8 個主要函數
+### 1.1 NEW_BRIDGE 專案
+```
+SHEET_ID=1_ShBQpCCgzPUPB6glCa7gKEzLRfKQBNu7R6dtrc2utU
+GITHUB_TOKEN=YOUR_GITHUB_TOKEN
+```
 
-### 2. 部署流程
-1. 在 `GAS_DEPLOY.MD` 中修改程式碼
-2. 複製修改後的程式碼到 GAS 編輯器
-3. 手動部署到 GAS
-4. 將修改推送到 GitHub 進行版本控制
+### 1.2 NEW_REPLY 專案
+```
+LINE_CHANNEL_ID=2007327902
+LINE_CHANNEL_SECRET=ddd0d925d78bcf03722931d49ff27a75
+LINE_ACCESS_TOKEN=Ldq2Q7r5XtI8wuNuKA+zBmthI2ytWHfHXofMsBWIXnFMRqPjFnFQTRVtr89G/l3+fvIjt4+qPTr9nUAbOLUhLz3pcxgTLZRUQ5v2C9zHEIvUgaQ81asWrepPs1JBcKAYYqrRVDwsHR3lZ/eE7vSi2AdB04t89/1O/w1cDnyilFU=
+SHEET_ID=1_ShBQpCCgzPUPB6glCa7gKEzLRfKQBNu7R6dtrc2utU
+LIFF_ID=2007327814-DGly5XNk
+```
 
-### 3. 注意事項
-- 保持主架構不變，僅修改必要的連結部分
-- 確保程式碼格式正確，便於複製到 GAS
-- 每次修改後都要測試功能是否正常
+## 2. NEW_BRIDGE 專案程式碼
 
-## NEW_BRIDGE 服務部署
-
-### 完整程式碼
-####doget.gs ##NEW_BRIDGE_1
-
+### 2.1 doGet.gs
 ```javascript
 // 連結 google sheet 表單
 var google_sheet_url = 'https://docs.google.com/spreadsheets/d/1_ShBQpCCgzPUPB6glCa7gKEzLRfKQBNu7R6dtrc2utU/edit?gid=0#gid=0';
@@ -94,10 +89,9 @@ function doGet(e) {
   output.setContent(JSON.stringify(reply));
   return output;
 }
-
 ```
 
-####other_function().gs ##NEW_BRIDGE_2
+### 2.2 other_function.gs
 ```javascript
 // 找出 google sheet 表單內空的格子
 function find_vain_N() {
@@ -122,97 +116,55 @@ function find_vain_N() {
 }
 ```
 
-
-####uploadGithub_OG_html().gs ##NEW_BRIDGE_3
+### 2.3 uploadGithub_OG_html.gs
 ```javascript
-// 把 OG html 檔案上傳到 Github 並檢查是否可以連上後回傳 URL
+// 把 OG html 檔案上傳到 Vercel 並回傳 URL
 function uploadGithub_OG_html(userId, card_img_url = "", mainTitle_1 = "", mainTitle_2 = "") {
   // 獲取當前時間戳
   const timestamp = Date.now();
-  // 上傳github的accessToken
-  const accessToken = 'YOUR_GITHUB_TOKEN';
-  // 上傳github的各參數
-  const owner = 'tsamcservice';
-  const repo = 'og_html';
+  // 上傳到 Vercel 的檔案路徑
   const filePath = 'og_html/' + userId + "_" + timestamp + ".html";
   const fileContent =
     `<!DOCTYPE html>
-				<html lang="en">
-					<head>
-						<meta charset="UTF-8">
-						<meta property="og:image" content="`+ card_img_url + `">
-						<meta property="og:title" content="`+ mainTitle_1 + `">
-						<meta property="og:description" content="`+ mainTitle_2 + `">
-					</head>
-					<body>
-						<script>
-							window.location.href = "/preview/?userId=` + encodeURIComponent(userId) + `";	
-						</script>
-					</body>
-				</html>`;
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta property="og:image" content="`+ card_img_url + `">
+        <meta property="og:title" content="`+ mainTitle_1 + `">
+        <meta property="og:description" content="`+ mainTitle_2 + `">
+      </head>
+      <body>
+        <script>
+          window.location.href = "/preview/?userId=` + encodeURIComponent(userId) + `";	
+        </script>
+      </body>
+    </html>`;
 
-  function checkWebPageAccessibility(url) {
-    while (true) {
-      try {
-        const response = UrlFetchApp.fetch(url);
-        const statusCode = response.getResponseCode();
+  // 上傳到 Vercel
+  const vercelUrl = 'https://barcursor-kt0y1qoip-tsamcservices-projects.vercel.app';
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    payload: JSON.stringify({
+      path: filePath,
+      content: fileContent
+    })
+  };
 
-        if (statusCode === 200) {
-          return url;
-        }
-      } catch (e) { }
-      Utilities.sleep(30000);
-    }
+  try {
+    const response = UrlFetchApp.fetch(vercelUrl + '/api/upload', options);
+    const result = JSON.parse(response.getContentText());
+    return result.url;
+  } catch (error) {
+    console.error('上傳到 Vercel 失敗:', error);
+    throw error;
   }
-  function uploadFileToGitHub() {
-    try {
-      const url = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
-      const headers = {
-        'Accept': 'application/vnd.github+json',
-        'Authorization': `Bearer ${accessToken}`,
-        'X-GitHub-Api-Version': '2022-11-28'
-      };
-      const payload = {
-        message: 'html for OG',
-        committer: {
-          name: 'tsamcservice',
-          email: 'tsamcservice@gmail.com'
-        },
-        content: encodeFileContentToBase64(fileContent)
-      };
-
-      const options = {
-        method: 'PUT',
-        headers: headers,
-        payload: JSON.stringify(payload)
-      };
-
-      const response = UrlFetchApp.fetch(url, options);
-      console.log(response)
-      const responseData = JSON.parse(response.getContentText());
-      // 請求成功後的響應數據
-      console.log(responseData)
-      // 回傳網址
-      return "/BARCURSOR/NEW_LINECARD/og_html/og_html/" + userId + "_" + timestamp + ".html";
-
-    } catch (error) {
-      console.log(error);
-      throw new Error(error);
-    }
-  }
-  function encodeFileContentToBase64(fileContent) {
-    // 將字串轉換為 Blob
-    const blob = Utilities.newBlob(fileContent);
-    // 將 Blob 進行 Base64 編碼
-    const base64EncodedData = Utilities.base64Encode(blob.getBytes());
-    return base64EncodedData
-  }
-
-  return checkWebPageAccessibility(uploadFileToGitHub());
 }
 ```
 
-####test.gs ##NEW_BRIDGE_4 
+### 2.4 test.gs
 ```javascript
 // 這裡是開發人員測試的地方
 function test() {
@@ -222,18 +174,9 @@ function test() {
 }
 ```
 
-### 部署步驟
-1. 創建新的 GAS 專案
-2. 複製上述程式碼
-3. 設定環境變數
-4. 部署為網頁應用程式
-5. 部署 ID: AKfycbytOQjUDPdHvPwn9CAtsNc9VyB356gakqEEBDVsA0J90J21fKcbsMX_FrihdjqJ8KyY
-6. 部署 URL: https://script.google.com/macros/s/AKfycbytOQjUDPdHvPwn9CAtsNc9VyB356gakqEEBDVsA0J90J21fKcbsMX_FrihdjqJ8KyY/exec
+## 3. NEW_REPLY 專案程式碼
 
-## NEW_REPLY 服務部署
-
-### 完整程式碼
-####doPost.gs ##NEW_REPLY_1
+### 3.1 doPost.gs
 ```javascript
 //認證身份 channel_access_token
 var CHANNEL_ACCESS_TOKEN = 'YOUR_LINE_CHANNEL_ACCESS_TOKEN'
@@ -273,10 +216,9 @@ function doPost(e) {
   }
   else { }
 }
-
 ```
 
-####other_function().gs ##NEW_REPLY_2
+### 3.2 other_function.gs
 ```javascript
 // 找出 google sheet 表單內空的格子
 function find_vain_N() {
@@ -299,11 +241,9 @@ function find_vain_N() {
     }
   }
 }
-
-
 ```
 
-####create_flexJson().gs ##NEW_REPLY_3
+### 3.3 create_flexJson.gs
 ```javascript
 //把參數帶入到flexJson訊息中並回傳flexJson
 function create_flexJson(sheet_data_card, userId) {
@@ -343,7 +283,7 @@ function create_flexJson(sheet_data_card, userId) {
 }
 ```
 
-####push_message_userid().gs ##NEW_REPLY_4
+### 3.4 push_message_userid.gs
 ```javascript
 //推波給使用者的訊息程式(任何訊息格式)
 function push_message_userid(reply, userid = "U48f2fd0b385a571e2ea9e355eab78ce7") {
@@ -361,7 +301,7 @@ function push_message_userid(reply, userid = "U48f2fd0b385a571e2ea9e355eab78ce7"
 }
 ```
 
-####push_txt_userid().gs ##NEW_REPLY_5
+### 3.5 push_txt_userid.gs
 ```javascript
 //推波給使用者的訊息程式(只限文字格式)
 function push_txt_userid(reply, userid = "U48f2fd0b385a571e2ea9e355eab78ce7") {
@@ -379,7 +319,7 @@ function push_txt_userid(reply, userid = "U48f2fd0b385a571e2ea9e355eab78ce7") {
 }
 ```
 
-####push_message_group().gs ##NEW_REPLY_6
+### 3.6 push_message_group.gs
 ```javascript
 //推波群組訊息(任何訊息格式)
 function push_message_group(groupId, reply) {
@@ -398,7 +338,7 @@ function push_message_group(groupId, reply) {
 } 
 ```
 
-####reply_message().gs ##NEW_REPLY_7
+### 3.7 reply_message.gs
 ```javascript
 // 對於訊息回覆的程式碼
 function reply_message(replyToken, reply, url = 'https://api.line.me/v2/bot/message/reply') {
@@ -416,7 +356,7 @@ function reply_message(replyToken, reply, url = 'https://api.line.me/v2/bot/mess
 }
 ```
 
-####test.gs ##NEW_REPLY_8
+### 3.8 test.gs
 ```javascript
 // 這裡是開發人員測試的地方
 function test() {
@@ -424,53 +364,45 @@ function test() {
 }
 ```
 
-### 部署步驟
-1. 創建新的 GAS 專案
-2. 複製上述程式碼
-3. 設定環境變數
-4. 部署為網頁應用程式
-5. 部署 ID: AKfycbwZIJQ7toOMi4-IzStW6VW5WhRrWLPlbEgIc2t-waWgxoHD-wHBEi-1OmqV7YpU5cSW
-6. 部署 URL: https://script.google.com/macros/s/AKfycbwZIJQ7toOMi4-IzStW6VW5WhRrWLPlbEgIc2t-waWgxoHD-wHBEi-1OmqV7YpU5cSW/exec
+## 4. 部署步驟
 
-## 環境變數設定
+### 4.1 NEW_BRIDGE 部署
+1. 前往 [Google Apps Script](https://script.google.com/)
+2. 點擊 "新增專案"
+3. 命名為 "NEW_BRIDGE"
+4. 複製上述 NEW_BRIDGE 相關程式碼到對應的檔案中
+5. 設定環境變數
+6. 部署為網頁應用程式：
+   - 執行身份：以執行此應用程式的使用者身份
+   - 存取權限：任何人
+7. 部署 ID: AKfycbyWlV6JwSl2Jzwrc6NLvCplTYylN6fhn-_rwKg4gBKiZ3QUIDP8OGmEgJJzJWVxCwiB7w
+8. 部署 URL: https://script.google.com/macros/s/AKfycbyWlV6JwSl2Jzwrc6NLvCplTYylN6fhn-_rwKg4gBKiZ3QUIDP8OGmEgJJzJWVxCwiB7w/exec
 
-### 1. NEW_BRIDGE 環境變數
-```javascript
-SHEET_ID = "1_ShBQpCCgzPUPB6glCa7gKEzLRfKQBNu7R6dtrc2utU"
-GITHUB_TOKEN = "YOUR_GITHUB_TOKEN"
-```
+### 4.2 NEW_REPLY 部署
+1. 前往 [Google Apps Script](https://script.google.com/)
+2. 點擊 "新增專案"
+3. 命名為 "NEW_REPLY"
+4. 複製上述 NEW_REPLY 相關程式碼到對應的檔案中
+5. 設定環境變數
+6. 部署為網頁應用程式：
+   - 執行身份：以執行此應用程式的使用者身份
+   - 存取權限：任何人
+7. 部署 ID: AKfycby-fQGSUcabNBTdpTeGeTUvJgz1DZjv-5BBXUoobDXK7HBZWgEFcisK47D5M4oP-0-L
+8. 部署 URL: https://script.google.com/macros/s/AKfycby-fQGSUcabNBTdpTeGeTUvJgz1DZjv-5BBXUoobDXK7HBZWgEFcisK47D5M4oP-0-L/exec
 
-### 2. NEW_REPLY 環境變數
-```javascript
-LINE_CHANNEL_ID = "2007327902"
-LINE_CHANNEL_SECRET = "ddd0d925d78bcf03722931d49ff27a75"
-LINE_ACCESS_TOKEN = "Ldq2Q7r5XtI8wuNuKA+zBmthI2ytWHfHXofMsBWIXnFMRqPjFnFQTRVtr89G/l3+fvIjt4+qPTr9nUAbOLUhLz3pcxgTLZRUQ5v2C9zHEIvUgaQ81asWrepPs1JBcKAYYqrRVDwsHR3lZ/eE7vSi2AdB04t89/1O/w1cDnyilFU="
-SHEET_ID = "1_ShBQpCCgzPUPB6glCa7gKEzLRfKQBNu7R6dtrc2utU"
-LIFF_ID = "2007327814-DGly5XNk"
-```
+## 5. 注意事項
 
-## 部署步驟
+### 5.1 權限設定
+1. 確保 Google Sheet 的存取權限正確
+2. 確認 GitHub Token 的權限設定
+3. 檢查 LINE Bot 的 Webhook 設定
 
-### 1. NEW_BRIDGE 部署
-1. 創建新的 GAS 專案
-2. 複製 `GAS_DEPLOY.MD` 中的 NEW_BRIDGE 程式碼
-3. 設定環境變數
-4. 部署為網頁應用程式
-5. 部署 ID: AKfycbytOQjUDPdHvPwn9CAtsNc9VyB356gakqEEBDVsA0J90J21fKcbsMX_FrihdjqJ8KyY
-6. 部署 URL: https://script.google.com/macros/s/AKfycbytOQjUDPdHvPwn9CAtsNc9VyB356gakqEEBDVsA0J90J21fKcbsMX_FrihdjqJ8KyY/exec
+### 5.2 路徑設定
+1. 所有 LIFF 相關路徑必須指向正確的 Vercel 部署網址
+2. 避免使用舊的路徑和連結
+3. 確保所有分享連結使用正確的 LIFF ID
 
-### 2. NEW_REPLY 部署
-1. 創建新的 GAS 專案
-2. 複製 `GAS_DEPLOY.MD` 中的 NEW_REPLY 程式碼
-3. 設定環境變數
-4. 部署為網頁應用程式
-5. 部署 ID: AKfycbwZIJQ7toOMi4-IzStW6VW5WhRrWLPlbEgIc2t-waWgxoHD-wHBEi-1OmqV7YpU5cSW
-6. 部署 URL: https://script.google.com/macros/s/AKfycbwZIJQ7toOMi4-IzStW6VW5WhRrWLPlbEgIc2t-waWgxoHD-wHBEi-1OmqV7YpU5cSW/exec
-
-## 注意事項
-1. 確保所有環境變數正確設定
-2. 部署時選擇「以我身分執行」
-3. 部署後測試 API 功能
-4. 確認 LINE Bot 設定正確
-5. 每次修改程式碼後，都要重新部署並測試
-6. 保持程式碼格式，便於複製到 GAS 編輯器 
+### 5.3 錯誤處理
+1. 定期檢查 GAS 執行日誌
+2. 監控 Sheet 資料的完整性
+3. 確保 API 呼叫的正確性 

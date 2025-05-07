@@ -6,9 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>LIFF Card Share</title>
 	<!-- 載入資料 -->
-	<script src="https://tsamcservice.github.io/BARCURSOR/NEW_LINECARD/data/common.js"></script>
-	<script src="https://tsamcservice.github.io/BARCURSOR/NEW_LINECARD/data/data.js"></script>
-	<link rel="stylesheet" type="text/css" href="https://tsamcservice.github.io/BARCURSOR/NEW_LINECARD/data/styles.css">
+	<script src="/data/common.js"></script>
+	<script src="/data/data.js"></script>
+	<link rel="stylesheet" type="text/css" href="/data/styles.css">
 	<!-- flex2html -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/PamornT/flex2html@main/css/flex2html.css" />
 	<script src="https://cdn.jsdelivr.net/gh/PamornT/flex2html@main/js/flex2html.min.js"></script>
@@ -246,58 +246,37 @@
 
 			// 網頁載入完後值行
 			window.onload = function () {
-				document.querySelector(".hiddenForward").classList.add("hidden");
 				document.getElementById('loader').style.display = 'flex';
-				// 寫入卡片製作標籤裡面參數預設值 (在data.js)
-				writeElementDefaultValues()
-				// 登入line並取得個人資料
-				liff.init({
-					liffId: "2007327814-DGly5XNk"
-				})
+				// 初始化 LIFF
+				liff.init({ liffId: "2007327814-DGly5XNk" })
 					.then(() => {
 						if (!liff.isLoggedIn()) {
 							liff.login();
-						}
-						else {
+						} else {
+							// 取得個人資料
 							liff.getProfile()
 								.then(async function (profile) {
-									// 取得 google sheet 個人資料顯示在頁面 (若為首次登入則 google sheet 建立新資料後重新讀取)
-									userId = profile.userId
+									userId = profile.userId;
 									displayName = profile.displayName;
-									var responseData = await sendRequest("get", userId)
+									// 取得 google sheet 個人資料
+									var responseData = await sendRequest("get", userId);
 									if (responseData.status == "first") {
 										await sendRequest("save", userId, readShowCardData());
-										var responseData = await sendRequest("get", userId)
+										var responseData = await sendRequest("get", userId);
 									}
 									const dataCard = JSON.parse(responseData.card);
-									writeShowCardData(dataCard)
-
-									// 會員卡片 cardJson[0] 讀取並紀錄存下 (flexJsonStatic框已在data.js)
-									flexJsonStatic = responseData.cardJson[0]
-									// 宣傳卡片 cardJson[1:] 讀取並寫入顯示在頁面
-									cardJson = responseData.cardJson
-									for (var PromotionalCard = 1; PromotionalCard < cardJson.length; PromotionalCard++) {
-										var tempHtml = `
-											<div class="card promotionalCard" onclick="this.classList.toggle('selected')">
-												<div class="chatbox" style="pointer-events: none;">
-													<div id="flex2htmlPromotional${PromotionalCard}"></div>
-												</div>
-											</div>`;
-
-										// 把卡片元素 html 加寫入到 slider
-										document.getElementById("slider").innerHTML += tempHtml;
-										cardJson[PromotionalCard] = cardJson[PromotionalCard].replace(/S{3,}/g, "https://liff.line.me/" + shareLIFFid + "/?userId=" + encodeURIComponent(userId) + "&PromotionalCard=" + PromotionalCard);
-										my_flexToHtml("flex2htmlPromotional" + PromotionalCard, [JSON.parse(cardJson[PromotionalCard])])
-									}
+									writeShowCardData(dataCard);
 									document.getElementById('loader').style.display = 'none';
 								})
-								.catch(function (error) {
-									alert("取得使用者資料錯誤\n" + error);
+								.catch((err) => {
+									console.error('取得個人資料失敗', err);
+									document.getElementById('loader').style.display = 'none';
 								});
 						}
 					})
 					.catch((err) => {
-						alert("登入失敗\n" + err);
+						console.error('LIFF 初始化失敗', err);
+						document.getElementById('loader').style.display = 'none';
 					});
 			};
 

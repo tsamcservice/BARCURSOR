@@ -1,0 +1,66 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "NEW_LINECARD/**/*",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/NEW_LINECARD/index.html"
+    },
+    {
+      "src": "/card",
+      "dest": "/NEW_LINECARD/card/index.html"
+    },
+    {
+      "src": "/preview",
+      "dest": "/NEW_LINECARD/preview/index.html"
+    },
+    {
+      "src": "/share",
+      "dest": "/NEW_LINECARD/share/index.html"
+    },
+    {
+      "src": "/css/(.*)",
+      "dest": "/NEW_LINECARD/css/$1"
+    },
+    {
+      "src": "/js/(.*)",
+      "dest": "/NEW_LINECARD/js/$1"
+    },
+    {
+      "src": "/data/(.*)",
+      "dest": "/NEW_LINECARD/data/$1"
+    },
+    {
+      "src": "/fancybox/(.*)",
+      "dest": "/NEW_LINECARD/fancybox/$1"
+    },
+    {
+      "src": "/download_card/(.*)",
+      "dest": "/NEW_LINECARD/download_card/$1"
+    },
+    {
+      "src": "/test/(.*)",
+      "dest": "/NEW_LINECARD/test/$1"
+    },
+    {
+      "src": "/archives/(.*)",
+      "dest": "/NEW_LINECARD/archives/$1"
+    },
+    {
+      "src": "/about/(.*)",
+      "dest": "/NEW_LINECARD/about/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/NEW_LINECARD/$1"
+    }
+  ],
+  "env": {
+    "LIFF_ID": "2007327814-DGly5XNk"
+  }
+} 

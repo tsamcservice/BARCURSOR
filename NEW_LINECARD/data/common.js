@@ -19,17 +19,33 @@ async function sendRequest(status, userId, dataCard = "", isDebug = true) {
 		// 將資料轉換成查詢字串
 		const queryString = new URLSearchParams(sendData).toString();
 
+		console.log("Debug - Sending request to GAS:", url);
 		const response = await fetch(`${url}?${queryString}`);
 		const responseData = await response.json();
 
-		console.log("Data sent:", sendData);
-		console.log("Response:", responseData);
+		// 除錯：詳細檢查 cardJson 的內容
+		if (responseData.cardJson) {
+			console.log("Debug - Full Response cardJson:", JSON.stringify(responseData.cardJson, null, 2));
+			console.log("Debug - cardJson type:", typeof responseData.cardJson);
+			if (Array.isArray(responseData.cardJson)) {
+				console.log("Debug - cardJson array length:", responseData.cardJson.length);
+				responseData.cardJson.forEach((item, index) => {
+					if (typeof item === 'string') {
+						console.log(`Debug - cardJson[${index}] LIFF ID check:`, item.match(/2000001236-On1R22VW|2007327814-DGly5XNk/g));
+						console.log(`Debug - cardJson[${index}] full content:`, item);
+					}
+				});
+			}
+		}
+
+		console.log("Debug - Full response data:", responseData);
 		if (responseData.status === 'first') { return responseData; }
 		else if (responseData.status === 'ok') { return responseData; }
 		else { alert("向google apps script寄送請求時\n回傳值非ok"); }
 	} catch (error) {
 		// 忽略 "TypeError: Failed to fetch" 錯誤
 		if (!isDebug && error instanceof TypeError && error.message === "Failed to fetch") { return; }
+		console.error("Debug - Error details:", error);
 		alert("向google apps script寄送請求時\n發生錯誤\n" + error);
 	}
 }
