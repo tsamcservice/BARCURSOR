@@ -1,11 +1,69 @@
 // LIFF ID 設定
-const googleAppsScriptUrl = "https://script.google.com/macros/s/AKfycbzQ4AwFFgmqoTgvfrBIBDv6ocIhM8huxOoix6OaguYjHGIlgoo6IEL_KxBonk5QP38jvw/exec";
+const googleAppsScriptUrl = "https://script.google.com/macros/s/AKfycbwfy6NZbWcrhc9KSQtMC2bcAWaGI_T4ASU42d8h4Jk0qNLHktnFJAynGJxcNV5QaLTrYA/exec";
 const shareLIFFid = "2007327814-DGly5XNk";
 
 // 這張會員卡片的 URL
 var card_img_url;
 // 需要跨 function 的參數
-var userId, displayName, flexJsonStatic, flexJsonList, flexJsonMessage, cardJsonPromotional
+var userId, displayName, flexJsonStatic, flexJsonList, flexJsonMessage, cardJsonPromotional;
+
+// 初始化 flexJsonStatic
+flexJsonStatic = `{
+  "type": "bubble",
+  "size": "mega",
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "image",
+        "url": "textContent_1_url",
+        "size": "full",
+        "aspectRatio": "1:1",
+        "aspectMode": "cover"
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "mainTitle_1",
+            "size": "xl",
+            "weight": "bold",
+            "color": "textColor"
+          },
+          {
+            "type": "text",
+            "text": "mainTitle_2",
+            "wrap": true,
+            "color": "textColor",
+            "margin": "md"
+          }
+        ],
+        "paddingAll": "20px"
+      }
+    ],
+    "backgroundColor": "#ffffff"
+  },
+  "footer": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "button",
+        "action": {
+          "type": "uri",
+          "label": "textContent_2",
+          "uri": "textContent_2_url"
+        },
+        "style": "primary",
+        "color": "#A4924A"
+      }
+    ]
+  }
+}`;
+
 // cardJson 裡面參數預設值
 var mainTitle_1 = "呈璽理財藝術共享空間";
 var mainTitle_2 = "我在呈璽，欣賞美好幸福 我在呈璽，喝茶喝咖啡很悠閒 我不在呈璽，就是在前往呈璽的路上";
