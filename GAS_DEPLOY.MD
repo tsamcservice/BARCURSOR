@@ -72,7 +72,7 @@ function doGet(e) {
     }
     else if (status == "uploadGithub") {
       data_card = JSON.parse(data_card)
-      var uploadOG_url = uploadGithub_OG_html(userId, data_card.card_img_url, data_card.mainTitle_1, data_card.mainTitle_2)
+      var uploadOG_url = uploadOG_html(userId, data_card.card_img_url, data_card.mainTitle_1, data_card.mainTitle_2)
       reply = { status: "ok", uploadOG_url: uploadOG_url };
     }
     else if (status == "addReadCount") {
@@ -123,10 +123,10 @@ function find_vain_N() {
 ```
 
 
-####uploadGithub_OG_html().gs ##NEW_BRIDGE_3
+####uploadOG_html().gs ##NEW_BRIDGE_3
 ```javascript
 // 把 OG html 檔案上傳到 Github 並檢查是否可以連上後回傳 URL
-function uploadGithub_OG_html(userId, card_img_url = "", mainTitle_1 = "", mainTitle_2 = "") {
+function uploadOG_html(userId, card_img_url = "", mainTitle_1 = "", mainTitle_2 = "") {
   // 獲取當前時間戳
   const timestamp = Date.now();
   // 上傳github的accessToken

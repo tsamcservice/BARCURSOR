@@ -1,4 +1,4 @@
-function uploadGithub_OG_html(userId, card_img_url = "", mainTitle_1 = "", mainTitle_2 = "") {
+function uploadOG_html(userId, card_img_url = "", mainTitle_1 = "", mainTitle_2 = "") {
   // 獲取當前時間戳
   const timestamp = Date.now();
   // 上傳到 Vercel 的檔案路徑
